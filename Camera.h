@@ -35,7 +35,7 @@ public:
 	XMFLOAT3 up = { 0,1,0 };
 	
 	// ビルボード行列
-	XMMATRIX matBillboard = XMMatrixIdentity();
+	XMMATRIX matBillboard = XMMatrixIdentity(); 
 
 public:
 	// カメラ初期化
