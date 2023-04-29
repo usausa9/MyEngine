@@ -26,8 +26,6 @@ Model Model::LoadFromOBJ(const std::string& modelName)
 	// ÇŒÇ¡Ç”Çüê∂ê¨
 	model.CreateBuffers();
 
-	HRESULT result;
-
 	return model;
 #pragma endregion
 }

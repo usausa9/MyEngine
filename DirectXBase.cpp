@@ -232,8 +232,8 @@ void DirectXBase::PreDraw()
 	// 4.描画コマンドここから
 	// ビューポート設定コマンド
 	D3D12_VIEWPORT viewport{};
-	viewport.Width = window->width;
-	viewport.Height = window->height;
+	viewport.Width = float(window->width);
+	viewport.Height = float(window->height);
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
 	viewport.MinDepth = 0.0f;

@@ -108,15 +108,6 @@ XMFLOAT2 Pad::GetLStick()
 	float x = padState.Gamepad.sThumbLX;
 	float y = padState.Gamepad.sThumbLY;
 
-	if (x > 0)
-	{
-		x - 1;
-	}
-	if (y > 0)
-	{
-		y - 1;
-	}
-
 	if (x * x < 5000 * 5000)
 	{
 		x = 0;
@@ -136,16 +127,6 @@ XMFLOAT2 Pad::GetRStick()
 {
 	float x = padState.Gamepad.sThumbRX;
 	float y = padState.Gamepad.sThumbRY;
-
-	if (x > 0)
-	{
-		x - 1;
-	}
-
-	if (y > 0)
-	{
-		y - 1;
-	}
 
 	x = x / 32767;
 	y = y / 32767;
