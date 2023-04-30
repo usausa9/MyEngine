@@ -294,15 +294,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	ParticleManager::CreatePipeline();
 	TextureManager::Init();
+
+	TextureIndex circleTex = TextureManager::Load(L"Resources/circleLight.png");
+	TextureIndex thunderTex = TextureManager::Load(L"Resources/thunder.png");
 	
 	TextureIndex reimuTex = TextureManager::Load(L"Resources/reimu.png");
 	TextureIndex doraTex = TextureManager::Load(L"Resources/texture.png");
 	Sprite* sprite = new Sprite(doraTex);
 	Sprite* sprite2 = new Sprite(reimuTex);
 
-	ParticleManager particle;
+	ParticleManager circleParticle;
+	ParticleManager thunderParticle;
 
-	particle.InitializeParticle();
+	circleParticle.InitializeParticle();
+	thunderParticle.InitializeParticle();
 
 	Model icoModel= Model::LoadFromOBJ("Ico");
 	Model cubeModel = Model::LoadFromOBJ("Cube");
@@ -347,13 +352,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 		for (int i = 0; i < 15; i++) 
 		{
-			const float rnd_pos = 0.5f;
+			const float rnd_pos = 10.0f;
 			XMFLOAT3 pos{};
-			pos.x = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
+			pos.x = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f - 10.f;
 			pos.y = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
 			pos.z = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
 
-			const float rnd_vel = 0.01f;
+			const float rnd_vel = 0.1f;
 			XMFLOAT3 vel{};
 			vel.x = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f;
 			vel.y = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f;
@@ -363,7 +368,28 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			const float rnd_acc = 0.1f;
 			// acc.y = -(float)rand() / RAND_MAX * rnd_acc;
 
-			particle.Add(60, pos, vel, acc, 0.1f, 0.0f);
+			thunderParticle.Add(40, pos, vel, acc, 1.5f, 0.0f);
+		}
+
+		for (int i = 0; i < 15; i++)
+		{
+			const float rnd_pos = 10.0f;
+			XMFLOAT3 pos{};
+			pos.x = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f + 10.f;
+			pos.y = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
+			pos.z = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
+
+			const float rnd_vel = 0.1f;
+			XMFLOAT3 vel{};
+			vel.x = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f ;
+			vel.y = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f;
+			vel.z = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f;
+
+			XMFLOAT3 acc{};
+			const float rnd_acc = 0.1f;
+			// acc.y = -(float)rand() / RAND_MAX * rnd_acc;
+
+			circleParticle.Add(60, pos, vel, acc, 1.5f, 0.0f);
 		}
 
 		sprite->position = { 130,130 };
@@ -391,7 +417,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		}
 
 		camera.Update();
-		particle.UpdateParticle();
+		thunderParticle.UpdateParticle();
+		circleParticle.UpdateParticle();
 
 		// パイプラインステートとルートシグネチャの設定コマンド
 		DirectXBase::Get()->commandList->SetPipelineState(pipelineState.Get());
@@ -438,7 +465,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		DirectXBase::Get()->commandList->SetDescriptorHeaps(1, TextureManager::srvHeap.GetAddressOf());
 		
 		camera.Set();
-		particle.DrawParticle(reimuTex);
+		circleParticle.DrawParticle(circleTex);
+		thunderParticle.DrawParticle(thunderTex);
 
 #pragma endregion
 

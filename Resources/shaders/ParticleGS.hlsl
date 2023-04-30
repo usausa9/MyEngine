@@ -30,7 +30,7 @@ void main(
 		float4 offset = offset_array[i] * input[0].scale;
         offset = mul(billboard, offset);
 		element.svpos = input[0].pos + offset;
-        element.svpos = mul(mul(view, projection), element.svpos);
+        element.svpos = mul(mul(projection, view), element.svpos);
         element.color = input[0].color;
 		element.uv = uv_array[i];
 		output.Append(element);
