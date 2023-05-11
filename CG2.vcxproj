@@ -168,6 +168,9 @@
     <ClInclude Include="CollisionPrimitive.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="DirectXBase.h" />
+    <ClInclude Include="Float2.h" />
+    <ClInclude Include="Float3.h" />
+    <ClInclude Include="Float4.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="Model.h" />
@@ -176,6 +179,7 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteManager.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="UsaMath.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
     <ClInclude Include="WinAPI.h" />

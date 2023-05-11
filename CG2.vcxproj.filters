@@ -149,6 +149,18 @@
     <ClInclude Include="ParticleManager.h">
       <Filter>ソース ファイル\.h\3d</Filter>
     </ClInclude>
+    <ClInclude Include="UsaMath.h">
+      <Filter>ソース ファイル\.h\math</Filter>
+    </ClInclude>
+    <ClInclude Include="Float2.h">
+      <Filter>ソース ファイル\.h\math</Filter>
+    </ClInclude>
+    <ClInclude Include="Float3.h">
+      <Filter>ソース ファイル\.h\math</Filter>
+    </ClInclude>
+    <ClInclude Include="Float4.h">
+      <Filter>ソース ファイル\.h\math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\Basic.hlsli">
