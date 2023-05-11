@@ -53,6 +53,16 @@ void FbxLoader::LoadModelFromFile(const string& modelName)
 
     // ファイルからロードしたFBXの情報をシーンにインポート
     fbxImporter->Import(fbxScene);
+
+    // モデル生成
+    Model* model = new Model();
+    model->name = modelName;
+
+    // ルートノードから順に解析してモデルに流し込む
+    ParseNodeRecursive(model, fbxScene->GetRootNode());
+
+    // FBXシーン解放
+    fbxScene->Destroy();
 }
 
 void FbxLoader::ParseNodeRecursive(Model* model, FbxNode* fbxNode)
