@@ -17,8 +17,21 @@ struct ConstBufferDataMaterial
 	XMFLOAT4 color; // 色(RGBA)
 };
 
+struct Node
+{
+
+};
+
 class Model
 {
+public:
+	// フレンドクラス
+	friend class FbxLoader;
+
+private:
+	// モデル名
+	std::string name;
+
 public:
 	// 頂点データ構造体
 	struct VertexPosNormalUv
