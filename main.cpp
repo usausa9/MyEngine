@@ -7,6 +7,8 @@
 #include "object3D.h"
 #include "Camera.h"
 
+#include "FbxLoader.h"
+
 #include "Sprite.h"
 #include "SpriteManager.h"
 
@@ -22,6 +24,8 @@
 #include "CollisionPrimitive.h"
 
 #include "ParticleManager.h"
+
+#include "FbxLoader.h"
 
 #include <Windows.h>
 #include <cmath>
@@ -333,6 +337,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 #pragma endregion
 
+	FbxLoader::GetInstance()->Initialize(DirectXBase::Get()->device.Get());
+	FbxLoader::GetInstance()->LoadModelFromFile("cube");
+
 	// ƒQ[ƒ€ƒ‹[ƒv
 	while (true)
 	{
@@ -487,6 +494,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	delete sprite;
 	delete sprite2;
 
+	FbxLoader::GetInstance()->Finalize();
 	TextureManager::Release();
 
 	return 0;

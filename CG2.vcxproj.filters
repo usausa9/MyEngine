@@ -99,6 +99,9 @@
     <ClCompile Include="ParticleManager.cpp">
       <Filter>ソース ファイル\.cpp\3d</Filter>
     </ClCompile>
+    <ClCompile Include="FbxLoader.cpp">
+      <Filter>ソース ファイル\.cpp\3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector2.h">
@@ -160,6 +163,9 @@
     </ClInclude>
     <ClInclude Include="Float4.h">
       <Filter>ソース ファイル\.h\math</Filter>
+    </ClInclude>
+    <ClInclude Include="FbxLoader.h">
+      <Filter>ソース ファイル\.h\3d</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

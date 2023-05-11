@@ -7,7 +7,7 @@ ComPtr<ID3D12PipelineState> ParticleManager::pipelineState;	// パイプライン
 // XMFLOAT3同士の加算処理
 const XMFLOAT3 operator+(const XMFLOAT3& Ihs, const XMFLOAT3& rhs)
 {
-	XMFLOAT3 result;
+	XMFLOAT3 result = { 0,0,0 };
 	result.x = Ihs.x + rhs.x;
 	result.y = Ihs.y + rhs.y;
 	result.z = Ihs.z + rhs.z;
