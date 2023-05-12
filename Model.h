@@ -19,6 +19,22 @@ struct ConstBufferDataMaterial
 
 struct Node
 {
+	// 名前
+	string name;
+
+	// ローカルスケール
+	XMVECTOR scaling = { 1,1,1,0 };
+	// ローカル回転角
+	XMVECTOR rotation = { 0,0,0,0 };
+	// ローカル移動
+	XMVECTOR translation = { 0,0,0,1 };
+	// ローカル変形行列
+	XMMATRIX transform;
+	// グローバル変形行列
+	XMMATRIX globalTransform;
+
+	// 親ノード
+	Node* parent = nullptr;
 
 };
 
@@ -30,7 +46,9 @@ public:
 
 private:
 	// モデル名
-	std::string name;
+	string name;
+	// ノード配列
+	vector<Node> nodes;
 
 public:
 	// 頂点データ構造体
@@ -40,6 +58,13 @@ public:
 		XMFLOAT3 normal;// 法線ベクトル 
 		XMFLOAT2 uv;	// uv座標
 	};
+
+	// メッシュを持つノード
+	Node* meshNode = nullptr;
+	// 頂点データ配列
+	vector<VertexPosNormalUv> vertices;
+	// 頂点インデックス配列
+	vector<unsigned short> indices;
 
 	// マテリアル
 	struct Material
