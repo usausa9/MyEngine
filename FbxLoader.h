@@ -15,7 +15,17 @@ public: // 定数
 	// モデル格納ルートパス
 	static const string baseDirectory; 
 
+	// テクスチャがない場合の標準テクスチャファイル名
+	static const string defaultTextureFilename;
+
 private:
+
+	// コピー代入演算子を禁止（シングルトンパターン）
+	void operator=(const FbxLoader& obj) = delete;
+
+	// ディレクトリを含んだファイルパスからファイル名を抽出する
+	string ExtractFileName(const string& path);
+
 	// privateなコンストラクタ（シングルトンパターン）
 	FbxLoader() = default;
 
@@ -25,9 +35,7 @@ private:
 	// コピーコンストラクタを禁止（シングルトンパターン）
 	FbxLoader(const FbxLoader& obj) = delete;
 
-	// コピー代入演算子を禁止（シングルトンパターン）
-	void operator=(const FbxLoader& obj) = delete;
-
+private:
 	// D3D12デバイス
 	ID3D12Device* device = nullptr;
 
@@ -76,7 +84,7 @@ public:
 	// マテリアル読み取り
 	void ParseMaterial(Model* model, FbxNode* fbxNode);
 	// テクスチャ読み取り
-	void LoadTexture(Model* model, FbxMesh* fbxMesh);
+	void LoadTexture(Model* model, const string& fullpath);
 
 	/// <summary>
 	/// シングルトンインスタンスの取得

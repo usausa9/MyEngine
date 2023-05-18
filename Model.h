@@ -2,6 +2,8 @@
 #include "TextureManager.h"
 #include "Common.h"
 
+#include <DirectXTex.h>
+
 // 定数バッファ用 データ構造体 (マテリアル)
 struct ConstBufferDataMaterial
 {
@@ -35,7 +37,6 @@ struct Node
 
 	// 親ノード
 	Node* parent = nullptr;
-
 };
 
 class Model
@@ -51,6 +52,12 @@ private:
 	vector<Node> nodes;
 
 public:
+
+	XMFLOAT3 ambient = { 1,1,1 };
+	XMFLOAT3 diffuse = { 1,1,1 };
+	TexMetadata metadata = {};
+	ScratchImage scratchImg = {};
+
 	// 頂点データ構造体
 	struct VertexPosNormalUv
 	{
@@ -105,8 +112,8 @@ private:
 	void LoadFromOBJInternal(const std::string& modelName);
 
 private:
-	std::vector<unsigned short> indices;
-	std::vector<VertexPosNormalUv> vertices;
+	//std::vector<unsigned short> indices;
+	//std::vector<VertexPosNormalUv> vertices;
 
 	ComPtr<ID3D12Resource> vertBuff = nullptr;
 	ComPtr<ID3D12Resource> indexBuff = nullptr;
