@@ -7,16 +7,16 @@
 // 定数バッファ用 データ構造体 (マテリアル)
 struct ConstBufferDataMaterial
 {
-	XMFLOAT3 ambient;
+	Float3 ambient;
 	float pad1;
 
-	XMFLOAT3 diffuse;
+	Float3 diffuse;
 	float pad2;
 
-	XMFLOAT3 specular;
+	Float3 specular;
 	float alpha;
 
-	XMFLOAT4 color; // 色(RGBA)
+	Float4 color; // 色(RGBA)
 };
 
 struct Node
@@ -53,17 +53,17 @@ private:
 
 public:
 
-	XMFLOAT3 ambient = { 1,1,1 };
-	XMFLOAT3 diffuse = { 1,1,1 };
+	Float3 ambient = { 1,1,1 };
+	Float3 diffuse = { 1,1,1 };
 	TexMetadata metadata = {};
 	ScratchImage scratchImg = {};
 
 	// 頂点データ構造体
 	struct VertexPosNormalUv
 	{
-		XMFLOAT3 pos;	// xyz座標
-		XMFLOAT3 normal;// 法線ベクトル 
-		XMFLOAT2 uv;	// uv座標
+		Float3 pos;	// xyz座標
+		Float3 normal;// 法線ベクトル 
+		Float2 uv;	// uv座標
 	};
 
 	// メッシュを持つノード
@@ -76,10 +76,10 @@ public:
 	// マテリアル
 	struct Material
 	{
-		std::string name;
-		XMFLOAT3 ambient;
-		XMFLOAT3 diffuse;
-		XMFLOAT3 specular;
+		string name;
+		Float3 ambient;
+		Float3 diffuse;
+		Float3 specular;
 		float alpha;
 
 		TextureIndex index = -1;

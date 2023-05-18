@@ -1,9 +1,6 @@
 #pragma once
-#include <DirectXMath.h>
 
 const float PI = 3.141592654f;
-
-using namespace DirectX;
 
 class Vector3
 {
@@ -17,7 +14,6 @@ public:
 	// コンストラクタ
 	Vector3();							// 零ベクトルとして生成
 	Vector3(float x, float y, float z);	// x,y成分を指定しての生成
-	Vector3(XMFLOAT3 o) :x(o.x), y(o.y), z(o.z) {};	// Vector3
 
 	// メンバ関数
 	float Length() const;				// ノルム(長さ)を求める
@@ -40,10 +36,6 @@ public:
 	Vector3& operator/=(float s);
 
 	Vector3& operator=(float num);
-
-	operator XMFLOAT3() const {
-		return { x,y,z };
-	};
 };
 
 // 2項演算子オーバーロード

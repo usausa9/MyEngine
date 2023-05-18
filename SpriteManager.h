@@ -7,7 +7,7 @@
 // 定数バッファ用 データ構造体 (マテリアル)
 struct SpriteConstBufferDataMaterial
 {
-	XMFLOAT4 color; // 色(RGBA)
+	Float4 color; // 色(RGBA)
 	XMMATRIX mat; // 3D変換行列
 };
 

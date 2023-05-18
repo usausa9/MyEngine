@@ -7,7 +7,7 @@ struct CameraConstBufferData
 	XMMATRIX view; 
 	XMMATRIX projection;
 	XMMATRIX billboard;
-	XMFLOAT3 position;
+	Float3 position;
 };
 
 class Camera
@@ -23,16 +23,16 @@ public:
 	CameraConstBufferData* constMapCamera = nullptr;
 
 	// アフィン変換情報
-	// XMFLOAT3 rotation = { 0,0,0 };
-	XMFLOAT3 target = { 0,0,0 };
-	XMFLOAT3 position = { 0,0,-20 };
+	// Float3 rotation = { 0,0,0 };
+	Float3 target = { 0,0,0 };
+	Float3 position = { 0,0,-20 };
 
 	// 3D用の射影変換
 	XMMATRIX matProjection = XMMatrixIdentity();
 
 	// ビュー変換行列
 	XMMATRIX matView = XMMatrixIdentity();
-	XMFLOAT3 up = { 0,1,0 };
+	Float3 up = { 0,1,0 };
 	
 	// ビルボード行列
 	XMMATRIX matBillboard = XMMatrixIdentity(); 

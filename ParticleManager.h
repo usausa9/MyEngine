@@ -12,21 +12,19 @@ struct ParticleConstBufferDataTransform
 
 struct Vertex
 {
-	XMFLOAT3 pos;
-	XMFLOAT2 scale;
-	XMFLOAT4 color;
+	Float3 pos;
+	Float2 scale;
+	Float4 color;
 };
 
 struct Particle
 {
-	using XMFLOAT3 = DirectX::XMFLOAT3;
-
-	XMFLOAT3 position = {};	// 座標
-	XMFLOAT3 velocity = {}; // 速度
-	XMFLOAT3 accel = {};	// 加速度
+	Float3 position = {};	// 座標
+	Float3 velocity = {}; // 速度
+	Float3 accel = {};	// 加速度
 	int frame = 0;			// 現在フレーム
 	int num_frame = 0;		// 終了フレーム
-	XMFLOAT4 color = { 1,1,1,1 };
+	Float4 color = { 1,1,1,1 };
 
 	float scale = 1.0f;
 
@@ -82,7 +80,7 @@ public:
 	void DrawParticle(TextureIndex index);
 
 	// コンテナに追加するもの
-	void Add(int life, XMFLOAT3 position, XMFLOAT3 velocity, XMFLOAT3 accel, float start_scale, float end_scale);
+	void Add(int life, Float3 position, Float3 velocity, Float3 accel, float start_scale, float end_scale);
 
 private:
 	int activeCount = 0;

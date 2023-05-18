@@ -9,8 +9,8 @@
 // 頂点データ構造体
 struct Vertex
 {
-	XMFLOAT3 pos;	// xyz座標
-	XMFLOAT2 uv;	// uv座標
+	Float3 pos;	// xyz座標
+	Float2 uv;	// uv座標
 };
 
 Sprite::Sprite()
@@ -127,7 +127,7 @@ void Sprite::Init()
 	assert(SUCCEEDED(vResult));
 
 	// 値を書き込むと自動的に転送される
-	constMapMaterial->color = XMFLOAT4(1, 0, 1, 1.0f); // RGBAで半透明の赤
+	constMapMaterial->color = Float4{1.f, 0.f, 1.f, 1.f}; // RGBAで半透明の赤
 	
 	XMMATRIX matWorld = XMMatrixScaling(scale.x, scale.y, 1);
 	matWorld *= XMMatrixRotationZ(rotation);

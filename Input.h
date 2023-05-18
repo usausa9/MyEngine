@@ -66,8 +66,8 @@ namespace Input
 		static bool Trigger(Button button);		// âüÇµÇΩèuä‘
 		static bool Released(Button button);	// ó£ÇµÇΩèuä‘
 
-		static XMFLOAT2 GetLStick();
-		static XMFLOAT2 GetRStick();
+		static Float2 GetLStick();
+		static Float2 GetRStick();
 
 	private:
 		static XINPUT_STATE padState;

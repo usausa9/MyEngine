@@ -360,18 +360,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		for (int i = 0; i < 15; i++) 
 		{
 			const float rnd_pos = 10.0f;
-			XMFLOAT3 pos{};
+			Float3 pos{};
 			pos.x = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f - 10.f;
 			pos.y = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
 			pos.z = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
 
 			const float rnd_vel = 0.1f;
-			XMFLOAT3 vel{};
+			Float3 vel{};
 			vel.x = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f;
 			vel.y = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f;
 			vel.z = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f;
 
-			XMFLOAT3 acc{};
+			Float3 acc{};
 			const float rnd_acc = 0.1f;
 			// acc.y = -(float)rand() / RAND_MAX * rnd_acc;
 
@@ -381,18 +381,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		for (int i = 0; i < 15; i++)
 		{
 			const float rnd_pos = 10.0f;
-			XMFLOAT3 pos{};
+			Float3 pos{};
 			pos.x = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f + 10.f;
 			pos.y = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
 			pos.z = (float)rand() / RAND_MAX * rnd_pos - rnd_pos / 2.0f;
 
 			const float rnd_vel = 0.1f;
-			XMFLOAT3 vel{};
+			Float3 vel{};
 			vel.x = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f ;
 			vel.y = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f;
 			vel.z = (float)rand() / RAND_MAX * rnd_vel - rnd_vel / 2.0f;
 
-			XMFLOAT3 acc{};
+			Float3 acc{};
 			const float rnd_acc = 0.1f;
 			// acc.y = -(float)rand() / RAND_MAX * rnd_acc;
 

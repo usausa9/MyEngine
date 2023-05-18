@@ -4,10 +4,10 @@
 ComPtr<ID3D12RootSignature> ParticleManager::rootSignature; 	// ルートシグネチャ
 ComPtr<ID3D12PipelineState> ParticleManager::pipelineState;	// パイプライン
 
-// XMFLOAT3同士の加算処理
-const XMFLOAT3 operator+(const XMFLOAT3& Ihs, const XMFLOAT3& rhs)
+// Float3同士の加算処理
+const Float3 operator+(const Float3& Ihs, const Float3& rhs)
 {
-	XMFLOAT3 result = { 0,0,0 };
+	Float3 result = { 0,0,0 };
 	result.x = Ihs.x + rhs.x;
 	result.y = Ihs.y + rhs.y;
 	result.z = Ihs.z + rhs.z;
@@ -361,7 +361,7 @@ void ParticleManager::UpdateParticle()
 		it->Update();
 
 		vertMap[activeCount].pos = it->position;
-		vertMap[activeCount].scale = XMFLOAT2(it->scale, it->scale);
+		vertMap[activeCount].scale = Float2{it->scale, it->scale};
 		vertMap[activeCount].color = it->color;
 
 		activeCount++;
@@ -387,7 +387,7 @@ void ParticleManager::DrawParticle(TextureIndex index)
 		DrawInstanced((UINT)activeCount, 1, 0, 0);
 }
 
-void ParticleManager::Add(int life, XMFLOAT3 position, XMFLOAT3 velocity, XMFLOAT3 accel, float start_scale, float end_scale)
+void ParticleManager::Add(int life, Float3 position, Float3 velocity, Float3 accel, float start_scale, float end_scale)
 {
 	// リストに要素追加
 	particles.emplace_front();

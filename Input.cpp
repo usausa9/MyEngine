@@ -103,7 +103,7 @@ bool Pad::Released(Button button)
 	return lastPadState.Gamepad.wButtons & (UINT)button && !(padState.Gamepad.wButtons & (UINT)button);
 }
 
-XMFLOAT2 Pad::GetLStick()
+Float2 Pad::GetLStick()
 {
 	float x = padState.Gamepad.sThumbLX;
 	float y = padState.Gamepad.sThumbLY;
@@ -123,7 +123,7 @@ XMFLOAT2 Pad::GetLStick()
 	return { x, y };
 }
 
-XMFLOAT2 Pad::GetRStick()
+Float2 Pad::GetRStick()
 {
 	float x = padState.Gamepad.sThumbRX;
 	float y = padState.Gamepad.sThumbRY;

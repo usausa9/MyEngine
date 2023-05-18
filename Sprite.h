@@ -27,7 +27,7 @@ public: // ƒƒ“ƒo•Ï”
 public:
 	TextureIndex tIndex = 0;	// •`‰æ‚·‚é‚à‚Ì‚ğ“ü‚ê‚ç‚ê‚é‚æ‚¤‚É‚·‚é
 
-	XMFLOAT2 position = { 100,100 };
-	XMFLOAT2 scale = { 1,1 };
+	Float2 position = { 100,100 };
+	Float2 scale = { 1,1 };
 	float rotation = 0;
 };
