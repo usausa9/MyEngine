@@ -4,7 +4,7 @@
 #include "WinAPI.h"
 #include "DirectXBase.h"
 
-#include "object3D.h"
+#include "Object3D.h"
 #include "Camera.h"
 
 #include "FbxLoader.h"
@@ -316,8 +316,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	Model icoModel= Model::LoadFromOBJ("Ico");
 	Model cubeModel = Model::LoadFromOBJ("Cube");
 	
-	object3D ico;
-	object3D cube;
+	Object3D ico;
+	Object3D cube;
 
 	Camera camera;
 

@@ -4,19 +4,19 @@
 #include "Model.h"
 
 // 定数バッファ用データ構造体 (3D変換行列)
-struct object3DConstBufferDataTransform
+struct Object3DConstBufferDataTransform
 {
 	XMMATRIX mat; // 3D変換行列
 };
 
-class object3D
+class Object3D
 {
 public:
 	// 定数バッファ (行列用)
 	ID3D12Resource* constBuffTransform = nullptr;
 
 	// 定数バッファマップ (行列用)
-	object3DConstBufferDataTransform* constMapTransform = nullptr;
+	Object3DConstBufferDataTransform* constMapTransform = nullptr;
 
 	// アフィン変換情報
 	Vector3 scale = { 1,1,1 };
@@ -27,7 +27,7 @@ public:
 	XMMATRIX matWorld = XMMatrixIdentity();
 
 	// 親オブジェクトへのポインタ
-	object3D* parent = nullptr;
+	Object3D* parent = nullptr;
 
 	Model* model = nullptr;
 

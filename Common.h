@@ -5,6 +5,7 @@
 using namespace Microsoft::WRL;
 
 #include <DirectXMath.h>
+#include "UsaMath.h"
 using namespace DirectX;
 using namespace std;
 

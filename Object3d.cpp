@@ -1,8 +1,8 @@
-#include "object3D.h"
+#include "Object3D.h"
 
 #include "DirectXBase.h"
 
-void object3D::InitializeObject3D()
+void Object3D::InitializeObject3D()
 {
 	HRESULT result;
 
@@ -36,7 +36,7 @@ void object3D::InitializeObject3D()
 }
 
 // 3Dオブジェクト更新処理
-void object3D::UpdateObject3D()
+void Object3D::UpdateObject3D()
 {
 	XMMATRIX matScale, matRot, matTrans;
 
@@ -65,7 +65,7 @@ void object3D::UpdateObject3D()
 	constMapTransform->mat = matWorld;
 }
 
-void object3D::DrawObject3D()
+void Object3D::DrawObject3D()
 {
 	// 定数バッファビュー(CBV)の設定コマンド
 	DirectXBase::Get()->commandList->SetGraphicsRootConstantBufferView(2, constBuffTransform->GetGPUVirtualAddress());

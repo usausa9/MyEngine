@@ -39,7 +39,6 @@ Vector3 Vector3::Cross(const Vector3& v) const
 		z * v.x - x * v.z,
 		x * v.y - y * v.x
 	);
-
 }
 
 // 単項演算子オーバーロード
@@ -107,6 +106,7 @@ Vector3& Vector3::operator*=(float s)
 	x *= s;
 	y *= s;
 	z *= s;
+
 	return *this;
 }
 Vector3& Vector3::operator/=(float s)
@@ -114,6 +114,7 @@ Vector3& Vector3::operator/=(float s)
 	x /= s;
 	y /= s;
 	z /= s;
+
 	return *this;
 }
 
