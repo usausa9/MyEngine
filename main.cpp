@@ -340,6 +340,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	FbxLoader::GetInstance()->Initialize(DirectXBase::Get()->device.Get());
 	FbxLoader::GetInstance()->LoadModelFromFile("cube");
 
+	Matrix4 a = 
+	{
+		1.f,2.f,2.f,2.f,
+		2.f,1.f,2.f,2.f,
+		2.f,2.f,1.f,2.f,
+		2.f,2.f,2.f,1.f
+	};
+
 	// ゲームループ
 	while (true)
 	{
@@ -356,6 +364,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		// DIrectX毎フレーム処理(更新処理) ここから
 		ico.UpdateObject3D();
 		cube.UpdateObject3D();
+
+		a.Inverse();
 
 		for (int i = 0; i < 15; i++) 
 		{

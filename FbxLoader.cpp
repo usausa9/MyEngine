@@ -113,9 +113,9 @@ void FbxLoader::ParseNodeRecursive(Model* model, FbxNode* fbxNode, Node* parent)
 	node.translation = { (float)translation[0], (float)translation[1],  (float)translation[2], 1.0f };
 
 	// 回転角を Degree(度) から rad(ラジアン) に 変換
-	node.rotation.m128_f32[0] = XMConvertToRadians(node.rotation.m128_f32[0]);
-	node.rotation.m128_f32[1] = XMConvertToRadians(node.rotation.m128_f32[1]);
-	node.rotation.m128_f32[2] = XMConvertToRadians(node.rotation.m128_f32[2]);
+	node.rotation.m128_f32[0] = UsaMath::DegreesToRadians(node.rotation.m128_f32[0]);
+	node.rotation.m128_f32[1] = UsaMath::DegreesToRadians(node.rotation.m128_f32[1]);
+	node.rotation.m128_f32[2] = UsaMath::DegreesToRadians(node.rotation.m128_f32[2]);
 
 	// スケール、回転、平行移動行列の計算
 	XMMATRIX matScaling, matRotation, matTranslation;

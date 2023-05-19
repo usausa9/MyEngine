@@ -11,7 +11,7 @@ void Camera::Initialize()
 {
 	// ŽË‰e•ÏŠ·s—ñ
 	matProjection = XMMatrixPerspectiveFovLH(
-		XMConvertToRadians(90.0f),	// ã‰º‰æŠp90“x
+		UsaMath::DegreesToRadians(90.0f),	// ã‰º‰æŠp90“x
 		(float)WinAPI::Get()->width / WinAPI::Get()->height,
 		0.1f, 1000.0f
 	);
@@ -49,7 +49,7 @@ void Camera::Initialize()
 
 void Camera::Update()
 {
-	matView = XMMatrixLookAtLH(XMLoadFloat3(&position), XMLoadFloat3(&target), XMLoadFloat3(&up));
+	//matView = XMMatrixLookAtLH(XMLoadFloat3(&position), XMLoadFloat3(&target), XMLoadFloat3(&up));
 
 	constMapCamera->projection = matProjection;
 	constMapCamera->view = matView;
