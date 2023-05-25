@@ -1,5 +1,5 @@
 #include "Vector3.h"
-#include <cmath>    // sqrt
+#include <cmath>	// sqrt
 
 // コンストラクタ
 // 零ベクトルとして生成
@@ -18,10 +18,12 @@ float Vector3::Length() const
 Vector3& Vector3::Normalize() /*const*/
 {
 	float len = Length();
+
 	if (len != 0)
 	{
 		return *this /= len;
 	}
+
 	return *this;
 }
 
@@ -152,14 +154,4 @@ Vector3& Vector3::operator=(float num)
 	z = num;
 
 	return *this;
-}
-
-float Degree2Radian(float degree)
-{
-	return degree * PI / 180;
-}
-
-float Radian2Degree(float radian)
-{
-	return radian * 180 / PI;
 }

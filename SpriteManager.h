@@ -7,17 +7,17 @@
 // 定数バッファ用 データ構造体 (マテリアル)
 struct SpriteConstBufferDataMaterial
 {
-	Float4 color; // 色(RGBA)
-	XMMATRIX mat; // 3D変換行列
+	Float4 color;	// 色(RGBA)
+	Matrix4 mat;	// 3D変換行列
 };
 
 class SpriteManager
 {
 public:
-
-	// 初化
+	// 初期化
 	void Init();
 
+	// 描画前処理
 	void PreDraw();
 
 public: // メンバ変数
@@ -36,5 +36,5 @@ public: // メンバ変数
 	ComPtr<ID3D12PipelineState> pipelineState = nullptr;
 
 public:
-	static XMMATRIX SpriteProjection;
+	static Matrix4 SpriteProjection;
 };

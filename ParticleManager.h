@@ -7,7 +7,7 @@
 // 定数バッファ用データ構造体 (3D変換行列)
 struct ParticleConstBufferDataTransform
 {
-	XMMATRIX mat; // 3D変換行列
+	Matrix4 mat; // 3D変換行列
 };
 
 struct Vertex
@@ -60,9 +60,6 @@ public:
 	Vector3 rotation = { 0,0,0 };
 	Vector3 position = { 0,0,0 };
 
-	// ワールド変換行列
-	XMMATRIX matWorld;
-
 public:
 	static ComPtr<ID3D12RootSignature> rootSignature; 	// ルートシグネチャ
 	static ComPtr<ID3D12PipelineState> pipelineState;	// パイプライン
@@ -85,5 +82,4 @@ public:
 private:
 	int activeCount = 0;
 	forward_list<Particle> particles;
-
 };

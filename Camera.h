@@ -4,9 +4,9 @@
 // 定数バッファ用データ構造体 (3D変換行列)
 struct CameraConstBufferData
 {
-	XMMATRIX view; 
-	XMMATRIX projection;
-	XMMATRIX billboard;
+	Matrix4 view; 
+	Matrix4 projection;
+	Matrix4 billboard;
 	Float3 position;
 };
 
@@ -28,14 +28,14 @@ public:
 	Float3 position = { 0,0,-20 };
 
 	// 3D用の射影変換
-	XMMATRIX matProjection = XMMatrixIdentity();
+	Matrix4 matProjection = matProjection.Identity();
 
 	// ビュー変換行列
-	XMMATRIX matView = XMMatrixIdentity();
+	Matrix4 matView = matView.Identity();
 	Float3 up = { 0,1,0 };
 	
 	// ビルボード行列
-	XMMATRIX matBillboard = XMMatrixIdentity(); 
+	Matrix4 matBillboard = matBillboard.Identity();
 
 public:
 	// カメラ初期化

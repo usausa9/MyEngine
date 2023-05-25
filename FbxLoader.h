@@ -19,7 +19,6 @@ public: // 定数
 	static const string defaultTextureFilename;
 
 private:
-
 	// コピー代入演算子を禁止（シングルトンパターン）
 	void operator=(const FbxLoader& obj) = delete;
 

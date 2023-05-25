@@ -274,10 +274,50 @@ Matrix4 Matrix4::Inverse()
 
 Matrix4 Matrix4::CreateViewMat(const Vector3& eye, const Vector3& target, const Vector3& up)
 {
+	Matrix4 result;
+
+	// カメラのワールド行列を作成
+	Vector3 cameraVecZ = target - eye;
+	cameraVecZ.Normalize();
+
+	Vector3 cameraVecX = up.Cross(cameraVecZ);
+	cameraVecX.Normalize();
+
+	Vector3 cameraVecY = cameraVecZ.Cross(cameraVecX);
+	cameraVecY.Normalize();
+
+	result = 
+	{
+		cameraVecX.x,cameraVecX.y,cameraVecX.z,	0,
+		cameraVecY.x,cameraVecY.y,cameraVecY.z,	0,
+		cameraVecZ.x,cameraVecZ.y,cameraVecZ.z,	0,
+		eye.x		,eye.y		 ,eye.z		  ,	1
+	};
+
+	// 作成したワールド行列を逆行列に変換
+	result.Inverse();
+
+	return result;
 }
 
 Matrix4 Matrix4::CreateProjectionMat(float fovY, float aspectRatio, float nearZ, float farZ)
 {
+	Matrix4 result;
+
+	float h = 1 / tanf(fovY / 2.0f);
+	float w = h / aspectRatio;
+	float z = farZ / (farZ - nearZ);
+	float cameraZ = (-nearZ * farZ) / (farZ - nearZ);
+
+	result = 
+	{
+		w,0,0,0,
+		0,h,0,0,
+		0,0,z,1,
+		0,0,cameraZ,0
+	};
+
+	return result;
 }
 
 Matrix4& Matrix4::operator*=(const Matrix4& m2)

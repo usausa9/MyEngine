@@ -113,19 +113,31 @@ void FbxLoader::ParseNodeRecursive(Model* model, FbxNode* fbxNode, Node* parent)
 	node.translation = { (float)translation[0], (float)translation[1],  (float)translation[2], 1.0f };
 
 	// 回転角を Degree(度) から rad(ラジアン) に 変換
-	node.rotation.m128_f32[0] = UsaMath::DegreesToRadians(node.rotation.m128_f32[0]);
-	node.rotation.m128_f32[1] = UsaMath::DegreesToRadians(node.rotation.m128_f32[1]);
-	node.rotation.m128_f32[2] = UsaMath::DegreesToRadians(node.rotation.m128_f32[2]);
+	node.rotation.x = UsaMath::DegreesToRadians(node.rotation.x);
+	node.rotation.y = UsaMath::DegreesToRadians(node.rotation.y);
+	node.rotation.z = UsaMath::DegreesToRadians(node.rotation.z);
+
+	// スケール、回転、平行移動行列の計算用Matの宣言
+	Matrix4 matScaling, matRotation, matTranslation;
+	Matrix4 rotX, rotY, rotZ;
 
 	// スケール、回転、平行移動行列の計算
-	XMMATRIX matScaling, matRotation, matTranslation;
-	matScaling = XMMatrixScalingFromVector(node.scaling);
-	matRotation = XMMatrixRotationRollPitchYawFromVector(node.rotation);
-	matTranslation = XMMatrixTranslationFromVector(node.translation);
+	// 行列の計算 : スケール 
+	matScaling = matScaling.Scale({ node.scaling.x, node.scaling.y, node.scaling.z });
+	// 行列の計算 : 回転
+	rotX = rotX.RotateX(node.rotation.x);
+	rotY = rotY.RotateY(node.rotation.y);
+	rotZ = rotZ.RotateZ(node.rotation.z);
+	matRotation.Identity();
+	matRotation *= rotZ;
+	matRotation *= rotX;
+	matRotation *= rotY;
+	// 行列の計算 : 平行移動
+	matTranslation = matTranslation.Translate({ node.translation.x, node.translation.y, node.translation.z });
 
 	// ローカル変形行列の計算
-	node.transform = XMMatrixIdentity();
-	node.transform *= matScaling;       //
+	node.transform = node.transform.Identity();
+	node.transform *= matScaling;
 	node.transform *= matRotation;
 	node.transform *= matTranslation;
 

@@ -6,7 +6,7 @@
 // 定数バッファ用データ構造体 (3D変換行列)
 struct Object3DConstBufferDataTransform
 {
-	XMMATRIX mat; // 3D変換行列
+	Matrix4 mat; // 3D変換行列
 };
 
 class Object3D
@@ -24,7 +24,7 @@ public:
 	Vector3 position = { 0,0,0 };
 
 	// ワールド変換行列
-	XMMATRIX matWorld = XMMatrixIdentity();
+	Matrix4 matWorld = matWorld.Identity();
 
 	// 親オブジェクトへのポインタ
 	Object3D* parent = nullptr;

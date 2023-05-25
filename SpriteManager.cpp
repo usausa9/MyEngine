@@ -4,18 +4,19 @@
 #include <d3dcompiler.h>
 #pragma comment(lib,"d3dcompiler.lib")
 
-XMMATRIX SpriteManager::SpriteProjection;
+Matrix4 SpriteManager::SpriteProjection;
 
 void SpriteManager::Init()
 {
 	HRESULT result;
 
-	SpriteManager::SpriteProjection = XMMATRIX(
+	SpriteManager::SpriteProjection = Matrix4
+	{
 		2.f / WinAPI::Get()->width, 0, 0, 0,
 		0, -2.f / WinAPI::Get()->height, 0, 0,
 		0, 0, 1, 0,
 		-1, 1, 0, 1
-	);
+	};
 
 #pragma region 頂点シェーダ
 	// 頂点シェーダの読み込みとコンパイル

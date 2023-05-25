@@ -1,6 +1,7 @@
 #include "TextureManager.h"
 #include "DirectXBase.h"
 
+
 int TextureManager::srvIndex = 0;
 D3D12_DESCRIPTOR_HEAP_DESC TextureManager::srvHeapDesc{};
 ComPtr<ID3D12DescriptorHeap> TextureManager::srvHeap = nullptr;

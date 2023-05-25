@@ -10,7 +10,7 @@ Camera::~Camera()
 void Camera::Initialize()
 {
 	// ŽË‰e•ÏŠ·s—ñ
-	matProjection = XMMatrixPerspectiveFovLH(
+	matProjection = matProjection.CreateProjectionMat(
 		UsaMath::DegreesToRadians(90.0f),	// ã‰º‰æŠp90“x
 		(float)WinAPI::Get()->width / WinAPI::Get()->height,
 		0.1f, 1000.0f
@@ -49,14 +49,17 @@ void Camera::Initialize()
 
 void Camera::Update()
 {
-	//matView = XMMatrixLookAtLH(XMLoadFloat3(&position), XMLoadFloat3(&target), XMLoadFloat3(&up));
+	matView = matView.CreateViewMat(position, target, up);
 
 	constMapCamera->projection = matProjection;
 	constMapCamera->view = matView;
 	constMapCamera->position = position;
 
-	matBillboard = XMMatrixInverse(nullptr, matView);
-	matBillboard.r[3] = XMVectorSet(0, 0, 0, 1);
+	matBillboard = matView.Inverse();
+	matBillboard.m[3][0] = 0;
+	matBillboard.m[3][1] = 0;
+	matBillboard.m[3][2] = 0;
+	matBillboard.m[3][3] = 1;
 
 	constMapCamera->billboard = matBillboard;
 }

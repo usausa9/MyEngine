@@ -1,14 +1,13 @@
 #pragma once
-
-const float PI = 3.141592654f;
+#include <vector>
 
 class Vector3
 {
 public:
 	// メンバ変数
-	float x; // x成分
-	float y; // y成分
-	float z; // z成分
+	float x;	// x成分
+	float y;	// y成分
+	float z;	// z成分
 
 public:
 	// コンストラクタ

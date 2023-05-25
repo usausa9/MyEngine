@@ -84,9 +84,6 @@
     <ClCompile Include="Object3D.cpp">
       <Filter>ソース ファイル\.cpp\3d</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>ソース ファイル\.cpp\others</Filter>
-    </ClCompile>
     <ClCompile Include="Input.cpp">
       <Filter>ソース ファイル\.cpp\others</Filter>
     </ClCompile>
@@ -101,6 +98,12 @@
     </ClCompile>
     <ClCompile Include="FbxLoader.cpp">
       <Filter>ソース ファイル\.cpp\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>ソース ファイル\.cpp\3d</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector4.cpp">
+      <Filter>ソース ファイル\.cpp\math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="FbxLoader.h">
       <Filter>ソース ファイル\.h\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4.h">
+      <Filter>ソース ファイル\.h\math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

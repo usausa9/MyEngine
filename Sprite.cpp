@@ -129,9 +129,10 @@ void Sprite::Init()
 	// ’l‚ð‘‚«ž‚Þ‚ÆŽ©“®“I‚É“]‘—‚³‚ê‚é
 	constMapMaterial->color = Float4{1.f, 0.f, 1.f, 1.f}; // RGBA‚Å”¼“§–¾‚ÌÔ
 	
-	XMMATRIX matWorld = XMMatrixScaling(scale.x, scale.y, 1);
-	matWorld *= XMMatrixRotationZ(rotation);
-	matWorld *= XMMatrixTranslation(position.x, position.y, 0);
+	Matrix4 matWorld;
+	matWorld = matWorld.Scale({ scale.x, scale.y, 1 });
+	matWorld *= matWorld.RotateZ(rotation);
+	matWorld *= matWorld.Translate({ position.x, position.y, 0 });
 
 	constMapMaterial->mat = matWorld * SpriteManager::SpriteProjection;
 	
@@ -140,9 +141,10 @@ void Sprite::Init()
 
 void Sprite::Update() 
 {
-	XMMATRIX matWorld = XMMatrixScaling(scale.x, scale.y, 1);
-	matWorld *= XMMatrixRotationZ(rotation);
-	matWorld *= XMMatrixTranslation(position.x, position.y, 0);
+	Matrix4 matWorld;
+	matWorld = matWorld.Scale({ scale.x, scale.y, 1 });
+	matWorld *= matWorld.RotateZ(rotation);
+	matWorld *= matWorld.Translate({ position.x, position.y, 0 });
 
 	constMapMaterial->mat = matWorld * SpriteManager::SpriteProjection;
 };
