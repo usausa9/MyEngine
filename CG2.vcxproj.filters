@@ -93,9 +93,6 @@
     <ClCompile Include="Collision.cpp">
       <Filter>ソース ファイル\.cpp\others</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleManager.cpp">
-      <Filter>ソース ファイル\.cpp\3d</Filter>
-    </ClCompile>
     <ClCompile Include="FbxLoader.cpp">
       <Filter>ソース ファイル\.cpp\3d</Filter>
     </ClCompile>
@@ -104,6 +101,9 @@
     </ClCompile>
     <ClCompile Include="Vector4.cpp">
       <Filter>ソース ファイル\.cpp\math</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleManager.cpp">
+      <Filter>ソース ファイル\.cpp\base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -134,9 +134,6 @@
     <ClInclude Include="WinAPI.h">
       <Filter>ソース ファイル\.h\base</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>ソース ファイル\.h\others</Filter>
-    </ClInclude>
     <ClInclude Include="Model.h">
       <Filter>ソース ファイル\.h\3d</Filter>
     </ClInclude>
@@ -151,9 +148,6 @@
     </ClInclude>
     <ClInclude Include="Collision.h">
       <Filter>ソース ファイル\.h\others</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleManager.h">
-      <Filter>ソース ファイル\.h\3d</Filter>
     </ClInclude>
     <ClInclude Include="UsaMath.h">
       <Filter>ソース ファイル\.h\math</Filter>
@@ -172,6 +166,12 @@
     </ClInclude>
     <ClInclude Include="Vector4.h">
       <Filter>ソース ファイル\.h\math</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>ソース ファイル\.h\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleManager.h">
+      <Filter>ソース ファイル\.h\base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
