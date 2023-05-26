@@ -4,7 +4,7 @@
 #include <Xinput.h>
 
 #ifndef DIRECTINPUT_VERSION
-	#define DIRECTINPUT_VERSION 0x0800
+#define DIRECTINPUT_VERSION 0x0800
 #endif
 
 #pragma comment(lib, "xinput.lib")

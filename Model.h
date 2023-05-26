@@ -16,7 +16,7 @@ struct ConstBufferDataMaterial
 	Float3 specular;
 	float alpha;
 
-	Float4 color; // 色(RGBA)
+	Float4 color;	// 色 (RGBA)
 };
 
 struct Node
@@ -60,9 +60,9 @@ public:
 	// 頂点データ構造体
 	struct VertexPosNormalUv
 	{
-		Float3 pos;	// xyz座標
-		Float3 normal;// 法線ベクトル 
-		Float2 uv;	// uv座標
+		Float3 pos;		// xyz座標
+		Float3 normal;	// 法線ベクトル 
+		Float2 uv;		// uv座標
 	};
 
 	// メッシュを持つノード
@@ -99,13 +99,18 @@ public:
 
 public:
 	ConstBufferDataMaterial* constMapMaterial = nullptr;
-	// OBJファイルから３Dモデル読み込み
+	// OBJファイルから3Dモデル読み込み
 	static Model LoadFromOBJ(const std::string& modelName);
 
 	void LoadMaterial(const std::string& directoryPath, const std::string& filename);
 	void CreateBuffers();
+	void CreateBuffers(ID3D12Device* device);
 
 	void Draw();
+	void Draw(ID3D12GraphicsCommandList* commandList);
+
+	// モデルの変形行列取得
+	const Matrix4& GetModelTransform() { return meshNode->globalTransform; }
 		
 private:
 	void LoadFromOBJInternal(const std::string& modelName);
@@ -116,7 +121,9 @@ private:
 
 	ComPtr<ID3D12Resource> vertBuff = nullptr;
 	ComPtr<ID3D12Resource> indexBuff = nullptr;
+	ComPtr<ID3D12Resource> texBuff = nullptr;
 	ComPtr<ID3D12Resource> constBuffMaterial = nullptr;
+	ComPtr<ID3D12DescriptorHeap> descHeapSRV = nullptr;
 
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
 	D3D12_INDEX_BUFFER_VIEW ibView{};
