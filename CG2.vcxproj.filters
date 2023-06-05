@@ -105,6 +105,12 @@
     <ClCompile Include="ParticleManager.cpp">
       <Filter>ソース ファイル\.cpp\base</Filter>
     </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>ソース ファイル\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="MyGame.cpp">
+      <Filter>ソース ファイル\.cpp\base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector2.h">
@@ -171,6 +177,12 @@
       <Filter>ソース ファイル\.h\3d</Filter>
     </ClInclude>
     <ClInclude Include="ParticleManager.h">
+      <Filter>ソース ファイル\.h\base</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>ソース ファイル\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="MyGame.h">
       <Filter>ソース ファイル\.h\base</Filter>
     </ClInclude>
   </ItemGroup>

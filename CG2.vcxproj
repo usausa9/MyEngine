@@ -130,7 +130,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>EnableAllWarnings</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
@@ -153,10 +153,12 @@
     <ClCompile Include="CollisionPrimitive.cpp" />
     <ClCompile Include="DirectXBase.cpp" />
     <ClCompile Include="FbxLoader.cpp" />
+    <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix4.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="MyGame.cpp" />
     <ClCompile Include="Object3D.cpp" />
     <ClCompile Include="ParticleManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -177,9 +179,11 @@
     <ClInclude Include="Float2.h" />
     <ClInclude Include="Float3.h" />
     <ClInclude Include="Float4.h" />
+    <ClInclude Include="GameScene.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="MyGame.h" />
     <ClInclude Include="Object3D.h" />
     <ClInclude Include="ParticleManager.h" />
     <ClInclude Include="Sprite.h" />
