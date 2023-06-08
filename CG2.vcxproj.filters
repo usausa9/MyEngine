@@ -111,6 +111,9 @@
     <ClCompile Include="MyGame.cpp">
       <Filter>ソース ファイル\.cpp\base</Filter>
     </ClCompile>
+    <ClCompile Include="FBXObject3D.cpp">
+      <Filter>ソース ファイル\.cpp\3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector2.h">
@@ -185,6 +188,9 @@
     <ClInclude Include="MyGame.h">
       <Filter>ソース ファイル\.h\base</Filter>
     </ClInclude>
+    <ClInclude Include="FBXObject3D.h">
+      <Filter>ソース ファイル\.h\3d</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\Basic.hlsli">
@@ -194,6 +200,9 @@
       <Filter>ソース ファイル\.hlsl</Filter>
     </None>
     <None Include="Resources\shaders\Particle.hlsli">
+      <Filter>ソース ファイル\.hlsl</Filter>
+    </None>
+    <None Include="FBX.hlsli">
       <Filter>ソース ファイル\.hlsl</Filter>
     </None>
   </ItemGroup>
@@ -217,6 +226,12 @@
       <Filter>ソース ファイル\.hlsl</Filter>
     </FxCompile>
     <FxCompile Include="Resources\shaders\ParticleGS.hlsl">
+      <Filter>ソース ファイル\.hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="FBXVS.hlsl">
+      <Filter>ソース ファイル\.hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="FBXPS.hlsl">
       <Filter>ソース ファイル\.hlsl</Filter>
     </FxCompile>
   </ItemGroup>

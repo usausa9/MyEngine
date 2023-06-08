@@ -1,5 +1,7 @@
 #include "GameScene.h"
 
+#include "FBXObject3D.h"
+
 using namespace Input;
 
 void GameScene::Initialize()
@@ -28,12 +30,24 @@ void GameScene::Initialize()
 	ico.InitializeObject3D();
 	cube.InitializeObject3D();
 
-	camera.Initialize();
+	camera->Initialize();
 
 	ico.model = &icoModel;
 	cube.model = &cubeModel;
 
+	// デバイスをセット
+	FBXObject3D::SetDevice(DirectXBase::Get()->device.Get());
+	// カメラをセット
+	FBXObject3D::SetCamera(camera);
+	// グラフィックスパイプライン生成
+	FBXObject3D::CreateGraphicsPipeline();
+
 	FbxLoader::GetInstance()->LoadModelFromFile("cube");
+}
+
+void GameScene::Finalize()
+{
+	delete camera;
 }
 
 void GameScene::Update()
@@ -92,37 +106,37 @@ void GameScene::Update()
 
 	if (Key::Down(DIK_A) || Key::Down(DIK_LEFT))
 	{
-		camera.position.x -= 0.5f;
+		camera->position.x -= 0.5f;
 	}
 	else if (Key::Down(DIK_D) || Key::Down(DIK_RIGHT))
 	{
-		camera.position.x += 0.5f;
+		camera->position.x += 0.5f;
 	}
 
 	if (Key::Down(DIK_S) || Key::Down(DIK_DOWN))
 	{
-		camera.position.y -= 0.5f;
+		camera->position.y -= 0.5f;
 	}
 	else if (Key::Down(DIK_W) || Key::Down(DIK_UP))
 	{
-		camera.position.y += 0.5f;
+		camera->position.y += 0.5f;
 	}
 
-	camera.Update();
+	camera->Update();
 	thunderParticle.UpdateParticle();
 	circleParticle.UpdateParticle();
 }
 
 void GameScene::Draw3D()
 {
-	camera.Set();
+	camera->Set();
 	ico.DrawObject3D();
 	cube.DrawObject3D();
 }
 
 void GameScene::DrawParticle()
 {
-	camera.Set();
+	camera->Set();
 	circleParticle.DrawParticle(circleTex);
 	thunderParticle.DrawParticle(thunderTex);
 }

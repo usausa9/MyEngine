@@ -264,6 +264,8 @@ void MyGame::Finalize()
 {
 	FbxLoader::GetInstance()->Finalize();
 	TextureManager::Release();
+
+	scene.Finalize();
 }
 
 void MyGame::Update()

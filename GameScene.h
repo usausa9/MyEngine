@@ -2,6 +2,7 @@
 #include "Input.h"
 #include "ParticleManager.h"
 #include "Sprite.h"
+#include "DirectXBase.h"
 
 #include "Object3D.h"
 #include "Camera.h"
@@ -27,14 +28,17 @@ private:
 
 	Object3D ico;
 	Object3D cube;
-
-	Camera camera;
+	
+	Camera* camera = new Camera;
 
 	float icoRad = 1.f;
 
 public:
 	// 初期化
 	void Initialize();
+
+	// 終了処理
+	void Finalize();
 
 	// 毎フレーム更新
 	void Update();
