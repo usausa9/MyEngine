@@ -202,7 +202,7 @@
     <None Include="Resources\shaders\Particle.hlsli">
       <Filter>ソース ファイル\.hlsl</Filter>
     </None>
-    <None Include="FBX.hlsli">
+    <None Include="Resources\shaders\FBX.hlsli">
       <Filter>ソース ファイル\.hlsl</Filter>
     </None>
   </ItemGroup>
@@ -228,10 +228,10 @@
     <FxCompile Include="Resources\shaders\ParticleGS.hlsl">
       <Filter>ソース ファイル\.hlsl</Filter>
     </FxCompile>
-    <FxCompile Include="FBXVS.hlsl">
+    <FxCompile Include="Resources\shaders\FBXVS.hlsl">
       <Filter>ソース ファイル\.hlsl</Filter>
     </FxCompile>
-    <FxCompile Include="FBXPS.hlsl">
+    <FxCompile Include="Resources\shaders\FBXPS.hlsl">
       <Filter>ソース ファイル\.hlsl</Filter>
     </FxCompile>
   </ItemGroup>

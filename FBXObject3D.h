@@ -39,6 +39,12 @@ public:	// メンバ関数
 	/// <param name="model"> モデル </param>
 	void SetModel(Model* model) { this->model = model; }
 
+	/// <summary>
+	/// 描画
+	/// </summary>
+	/// <param name="cmdList"></param>
+	void Draw();
+
 protected:	// メンバ変数
 	// 定数バッファ
 	ComPtr<ID3D12Resource> constBuffTransform;
@@ -58,14 +64,15 @@ public:	// 静的メンバ関数
 	// setter
 	static void SetDevice(ID3D12Device* device) { FBXObject3D::device = device; }
 	static void SetCamera(Camera* camera) { FBXObject3D::camera = camera; }
+	static void SetCommandList(ID3D12GraphicsCommandList* commandList) { FBXObject3D::commandList = commandList; }
 	static void CreateGraphicsPipeline();	// パイプラインの生成
 
 private: // 静的メンバ変数
 	
+	static ID3D12GraphicsCommandList* commandList;	//コマンドリスト
 	static ID3D12Device* device;	// デバイス
 	static Camera* camera;			// カメラ
 	static ComPtr<ID3D12RootSignature> rootSigunature;
 	static ComPtr<ID3D12PipelineState> pipelineState;
-
 };
 

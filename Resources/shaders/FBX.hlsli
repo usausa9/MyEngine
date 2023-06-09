@@ -1,8 +1,8 @@
-cbuffer ConstBuffer0 : register(b0)
+cbuffer cbuff0 : register(b0)
 {
-	matrix viewProjection;	// ビュープロジェクション行列
-	matrix worldTransform;	// ワールド行列
-	float3 cameraPosition;	// カメラ座標(ワールド座標)
+	matrix viewProj;	// ビュープロジェクション行列
+	matrix world;		// ワールド行列
+	float3 cameraPos;	//	カメラ座標(ワールド座標)
 };
 
 // 頂点バッファの入力
@@ -13,8 +13,7 @@ struct VSInput
 	float2 uv : TEXCOORD;	// テクスチャ法線
 };
 
-// 頂点シェーダーの出力構造体
-// (頂点シェーダーからピクセルシェーダーへのやり取りに使用する)
+// 頂点シェーダからピクセルシェーダへのやり取りに使用する構造体
 struct VSOutput
 {
 	float4 svpos : SV_POSITION;	// システム用頂点座標

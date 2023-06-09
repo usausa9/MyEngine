@@ -6,6 +6,19 @@ using namespace Input;
 
 void GameScene::Initialize()
 {
+
+	// デバイスをセット
+	FBXObject3D::SetDevice(DirectXBase::Get()->device.Get());
+	// カメラをセット
+	FBXObject3D::SetCamera(camera);
+	// コマンドリスト初期化
+	FBXObject3D::SetCommandList(DirectXBase::Get()->commandList.Get());
+	// グラフィックスパイプライン生成
+	FBXObject3D::CreateGraphicsPipeline();
+
+	// モデル名を指定してファイル読み込み
+	model1 = FbxLoader::GetInstance()->LoadModelFromFile("cube");
+
 	circleTex = TextureManager::Load(L"Resources/circleLight.png");
 	thunderTex = TextureManager::Load(L"Resources/thunder.png");
 	reimuTex = TextureManager::Load(L"Resources/reimu.png");
@@ -14,13 +27,13 @@ void GameScene::Initialize()
 	sprite = make_unique<Sprite>(doraTex);
 	sprite2 = make_unique<Sprite>(reimuTex);
 
-	icoModel = Model::LoadFromOBJ("Ico");
-	cubeModel = Model::LoadFromOBJ("Cube");
-
 	ParticleManager::CreatePipeline();
 
 	circleParticle.InitializeParticle();
 	thunderParticle.InitializeParticle();
+
+	icoModel = Model::LoadFromOBJ("Ico");
+	cubeModel = Model::LoadFromOBJ("Cube");
 
 	ico.position = { 2.5f,0,0 };
 	ico.scale = { icoRad,icoRad,icoRad };
@@ -30,23 +43,25 @@ void GameScene::Initialize()
 	ico.InitializeObject3D();
 	cube.InitializeObject3D();
 
-	camera->Initialize();
-
 	ico.model = &icoModel;
 	cube.model = &cubeModel;
 
-	// デバイスをセット
-	FBXObject3D::SetDevice(DirectXBase::Get()->device.Get());
-	// カメラをセット
-	FBXObject3D::SetCamera(camera);
-	// グラフィックスパイプライン生成
-	FBXObject3D::CreateGraphicsPipeline();
+	// FBXモデル関連
+	object1 = new FBXObject3D;
+	object1->Initialize();
+	object1->SetModel(model1);
 
-	FbxLoader::GetInstance()->LoadModelFromFile("cube");
+	// カメラ初期化
+	camera->Initialize();
+
+	camera->target = { 0,20,0 };
+	camera->position = { 0,0,-100 };
 }
 
 void GameScene::Finalize()
 {
+	delete object1;
+	delete model1;
 	delete camera;
 }
 
@@ -56,6 +71,7 @@ void GameScene::Update()
 	ico.UpdateObject3D();
 	cube.UpdateObject3D();
 
+	// パーティクル
 	for (int i = 0; i < 15; i++)
 	{
 		const float rnd_pos = 10.0f;
@@ -122,6 +138,9 @@ void GameScene::Update()
 		camera->position.y += 0.5f;
 	}
 
+	
+	object1->Update();
+
 	camera->Update();
 	thunderParticle.UpdateParticle();
 	circleParticle.UpdateParticle();
@@ -129,14 +148,22 @@ void GameScene::Update()
 
 void GameScene::Draw3D()
 {
+	// カメラセット
 	camera->Set();
+
+	// 3Dオブジェ描画
 	ico.DrawObject3D();
 	cube.DrawObject3D();
+
+	object1->Draw();
 }
 
 void GameScene::DrawParticle()
 {
+	// カメラセット
 	camera->Set();
+
+	// パーティクルオブジェ描画
 	circleParticle.DrawParticle(circleTex);
 	thunderParticle.DrawParticle(thunderTex);
 }

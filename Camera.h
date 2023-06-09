@@ -45,4 +45,10 @@ public:
 	void Update();
 
 	void Set();
+
+	// ビュープロジェクション
+	Matrix4 GetViewProjection()const { return matView * matProjection; }
+	
+	// カメラ座標取得
+	Float3 GetEye()const { return position; }
 };

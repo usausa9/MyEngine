@@ -6,6 +6,7 @@ Camera* FBXObject3D::camera = nullptr;
 using namespace Microsoft::WRL;
 using namespace DirectX;
 
+ID3D12GraphicsCommandList* FBXObject3D::commandList = nullptr;
 ComPtr<ID3D12RootSignature> FBXObject3D::rootSigunature;
 ComPtr<ID3D12PipelineState> FBXObject3D::pipelineState;
 
@@ -216,11 +217,11 @@ void FBXObject3D::Update()
 	matWorld *= matTrans;
 
 	// ビュープロジェクション行列
-	const Matrix4& matViewProjection = camera.();
+	const Matrix4& matViewProjection = camera->GetViewProjection();
 	// モデルのメッシュトランスフォーム
 	const Matrix4& modelTransform = model->GetModelTransform();
 	// カメラ座標
-	const Float3& cameraPos = camera.();
+	const Float3& cameraPos = camera->GetEye();
 
 	HRESULT result;
 	// 定数バッファへデータ転送
@@ -233,4 +234,25 @@ void FBXObject3D::Update()
 		constMap->cameraPosition = cameraPos;
 		constBuffTransform->Unmap(0, nullptr);
 	}
+}
+
+void FBXObject3D::Draw()
+{
+	// モデルがなければ描画しない
+	if (model == nullptr)
+	{
+		return;
+	}
+
+	// パイプラインステートの設定
+	commandList->SetPipelineState(pipelineState.Get());
+	// ルートシグネチャの設定
+	commandList->SetGraphicsRootSignature(rootSigunature.Get());
+	// プリミティブ形状を設定
+	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	// 定数バッファビューをセット
+	commandList->SetGraphicsRootConstantBufferView(0, constBuffTransform->GetGPUVirtualAddress());
+
+	// モデル描画
+	model->Draw(commandList);
 }

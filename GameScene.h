@@ -4,6 +4,7 @@
 #include "Sprite.h"
 #include "DirectXBase.h"
 
+#include "FBXObject3D.h"
 #include "Object3D.h"
 #include "Camera.h"
 
@@ -29,6 +30,9 @@ private:
 	Object3D ico;
 	Object3D cube;
 	
+	Model* model1 = nullptr;
+	FBXObject3D* object1 = nullptr;
+
 	Camera* camera = new Camera;
 
 	float icoRad = 1.f;

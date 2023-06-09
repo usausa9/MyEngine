@@ -406,7 +406,21 @@ void Model::Draw()
 
 void Model::Draw(ID3D12GraphicsCommandList* commandList)
 {
+	// 頂点バッファをセット(VBV)
+	commandList->IASetVertexBuffers(0, 1, &vbView);
+	// インデックスバッファをセット(IBV)
+	commandList->IASetIndexBuffer(&ibView);
 
+	// デスクリプタヒープのセット
+	ID3D12DescriptorHeap* ppHeaps[] = { descHeapSRV.Get() };
+	commandList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
+
+	// シェーダーリソースビューをセット
+	commandList->SetGraphicsRootDescriptorTable
+	(1, descHeapSRV->GetGPUDescriptorHandleForHeapStart());
+
+	// 描画コマンド
+	commandList->DrawIndexedInstanced((UINT)indices.size(), 1, 0, 0, 0);
 }
 
 void Model::LoadFromOBJInternal(const std::string& modelName)

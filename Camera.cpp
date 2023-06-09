@@ -11,7 +11,7 @@ void Camera::Initialize()
 {
 	// ŽË‰e•ÏŠ·s—ñ
 	matProjection = matProjection.CreateProjectionMat(
-		UsaMath::DegreesToRadians(90.0f),	// ã‰º‰æŠp90“x
+		UsaMath::DegreesToRadians(60.0f),	// ã‰º‰æŠp90“x
 		(float)WinAPI::Get()->width / WinAPI::Get()->height,
 		0.1f, 1000.0f
 	);
@@ -50,6 +50,7 @@ void Camera::Initialize()
 void Camera::Update()
 {
 	matView = matView.CreateViewMat(position, target, up);
+	matView.Identity();
 
 	constMapCamera->projection = matProjection;
 	constMapCamera->view = matView;
