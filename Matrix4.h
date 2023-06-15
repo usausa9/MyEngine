@@ -10,7 +10,7 @@ public:
 	float m[4][4];
 
 	// 単位行列代入
-	Matrix4 Identity();
+	static Matrix4 Identity();
 	Matrix4 Identity(Matrix4 matrix);
 
 	// 行列のスカラー
@@ -34,7 +34,7 @@ public:
 	Vector3 Transform(const Vector3& v, const Matrix4& m);
 
 	// 逆行列生成
-	Matrix4 Inverse();
+	static Matrix4 Inverse(const Matrix4 m);
 
 	// ビュー行列関連
 	Matrix4 CreateViewMat(const Vector3& eye, const Vector3& target, const Vector3& up);

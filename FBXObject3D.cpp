@@ -192,14 +192,14 @@ void FBXObject3D::Update()
 	Matrix4 matScale, matRot, matTrans;
 
 	// スケール、回転、平行移動行列の計算
-	matScale.Identity();
+	matScale = Matrix4::Identity();
 	matScale.Scale(scale);
 
 	Matrix4 rotX, rotY, rotZ;
-	matRot.Identity();
-	rotX.Identity();
-	rotY.Identity();
-	rotZ.Identity();
+	matRot = Matrix4::Identity();
+	rotX = Matrix4::Identity();
+	rotY = Matrix4::Identity();
+	rotZ = Matrix4::Identity();
 	rotZ.RotateZ(rotation.z);
 	rotX.RotateX(rotation.x);
 	rotY.RotateY(rotation.y);
@@ -207,11 +207,11 @@ void FBXObject3D::Update()
 	matRot *= rotX;
 	matRot *= rotY;
 
-	matTrans.Identity();
+	matTrans = Matrix4::Identity();
 	matTrans.Translate(position);
 
 	// ワールド行列合成
-	matWorld.Identity();
+	matWorld = Matrix4::Identity();
 	matWorld *= matScale;
 	matWorld *= matRot;
 	matWorld *= matTrans;

@@ -11,7 +11,7 @@ void Camera::Initialize()
 {
 	// ŽË‰e•ÏŠ·s—ñ
 	matProjection = matProjection.CreateProjectionMat(
-		UsaMath::DegreesToRadians(60.0f),	// ã‰º‰æŠp90“x
+		UsaMath::DegreesToRadians(90.0f),	// ã‰º‰æŠp90“x
 		(float)WinAPI::Get()->width / WinAPI::Get()->height,
 		0.1f, 1000.0f
 	);
@@ -49,14 +49,14 @@ void Camera::Initialize()
 
 void Camera::Update()
 {
+	matView = Matrix4::Identity();
 	matView = matView.CreateViewMat(position, target, up);
-	matView.Identity();
 
 	constMapCamera->projection = matProjection;
 	constMapCamera->view = matView;
 	constMapCamera->position = position;
 
-	matBillboard = matView.Inverse();
+	matBillboard = Matrix4::Inverse(matView);
 	matBillboard.m[3][0] = 0;
 	matBillboard.m[3][1] = 0;
 	matBillboard.m[3][2] = 0;

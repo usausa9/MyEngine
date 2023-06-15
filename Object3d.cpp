@@ -42,14 +42,14 @@ void Object3D::UpdateObject3D()
 
 	// スケール、回転、平行移動行列の計算
 	matScale = matScale.Scale(scale);
-	matRot = matRot.Identity();
+	matRot = Matrix4::Identity();
 	matRot *= matRot.RotateZ(rotation.z);
 	matRot *= matRot.RotateX(rotation.x);
 	matRot *= matRot.RotateY(rotation.y);
 	matTrans = matTrans.Translate(position);
 
 	// ワールド行列の合成
-	matWorld = matWorld.Identity();	// 変形をリセット
+	matWorld = Matrix4::Identity();	// 変形をリセット
 	matWorld *= matScale;			// ワールド行列にスケーリングを反映
 	matWorld *= matRot;				// ワールド行列に回転を反映
 	matWorld *= matTrans;			// ワールド行列に平行移動を反映

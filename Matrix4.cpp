@@ -13,8 +13,7 @@ Matrix4 Matrix4::Identity()
 		0.0f,0.0f,0.0f,1.0f
 	};
 
-	*this = result;
-	return *this;
+	return result;
 }
 
 Matrix4 Matrix4::Identity(Matrix4 matrix)
@@ -171,7 +170,7 @@ Vector3 Matrix4::Transform(const Vector3& v, const Matrix4& m)
 	return result;
 }
 
-Matrix4 Matrix4::Inverse()
+Matrix4 Matrix4::Inverse(const Matrix4 m)
 {
 	// i = 行  j = 列  k = 対角成分が存在する列
 
@@ -179,10 +178,10 @@ Matrix4 Matrix4::Inverse()
 	Matrix4 result;
 	Matrix4 identityMatrix;
 
-	mat = *this;
+	mat = m;
 
 	// identityMatrixを単位行列で初期化
-	identityMatrix = Identity();
+	identityMatrix = Matrix4::Identity();
 
 	// 掃き出し用 右側にでた4*4が結果になる 右側に単位行列を代入
 	float sweep[4][8];
@@ -268,8 +267,7 @@ Matrix4 Matrix4::Inverse()
 		}
 	}
 
-	*this = result;
-	return *this;
+	return result;
 }
 
 Matrix4 Matrix4::CreateViewMat(const Vector3& eye, const Vector3& target, const Vector3& up)
@@ -295,7 +293,7 @@ Matrix4 Matrix4::CreateViewMat(const Vector3& eye, const Vector3& target, const 
 	};
 
 	// 作成したワールド行列を逆行列に変換
-	result.Inverse();
+	result = Inverse(result);
 
 	return result;
 }

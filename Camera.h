@@ -28,14 +28,14 @@ public:
 	Float3 position = { 0,0,-20 };
 
 	// 3D用の射影変換
-	Matrix4 matProjection = matProjection.Identity();
+	Matrix4 matProjection = Matrix4::Identity();
 
 	// ビュー変換行列
 	Matrix4 matView = matView.Identity();
 	Float3 up = { 0,1,0 };
 	
 	// ビルボード行列
-	Matrix4 matBillboard = matBillboard.Identity();
+	Matrix4 matBillboard = Matrix4::Identity();
 
 public:
 	// カメラ初期化

@@ -133,7 +133,7 @@ void FbxLoader::ParseNodeRecursive(Model* model, FbxNode* fbxNode, Node* parent)
 	rotX = rotX.RotateX(node.rotation.x);
 	rotY = rotY.RotateY(node.rotation.y);
 	rotZ = rotZ.RotateZ(node.rotation.z);
-	matRotation.Identity();
+	matRotation = Matrix4::Identity();
 	matRotation *= rotZ;
 	matRotation *= rotX;
 	matRotation *= rotY;
@@ -141,7 +141,7 @@ void FbxLoader::ParseNodeRecursive(Model* model, FbxNode* fbxNode, Node* parent)
 	matTranslation = matTranslation.Translate({ node.translation.x, node.translation.y, node.translation.z });
 
 	// ローカル変形行列の計算
-	node.transform = node.transform.Identity();
+	node.transform = Matrix4::Identity();
 	node.transform *= matScaling;
 	node.transform *= matRotation;
 	node.transform *= matTranslation;

@@ -6,7 +6,6 @@ using namespace Input;
 
 void GameScene::Initialize()
 {
-
 	// デバイスをセット
 	FBXObject3D::SetDevice(DirectXBase::Get()->device.Get());
 	// カメラをセット

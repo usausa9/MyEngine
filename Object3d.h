@@ -24,7 +24,7 @@ public:
 	Vector3 position = { 0,0,0 };
 
 	// ワールド変換行列
-	Matrix4 matWorld = matWorld.Identity();
+	Matrix4 matWorld = Matrix4::Identity();
 
 	// 親オブジェクトへのポインタ
 	Object3D* parent = nullptr;

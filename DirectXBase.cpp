@@ -338,3 +338,4 @@ DirectXBase* DirectXBase::Get()
 }
 
 DirectXBase DirectXBase::currentDirectX;
+
