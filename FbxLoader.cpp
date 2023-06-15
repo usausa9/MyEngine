@@ -3,7 +3,7 @@
 /// <summary>
 /// 静的メンバ変数の実体
 /// </summary>
-const string FbxLoader::baseDirectory = "Resources/";
+const string FbxLoader::baseDirectory = "Resources/Models/FBX/";
 const string FbxLoader::defaultTextureFilename = "white1x1.png";
 
 string FbxLoader::ExtractFileName(const string& path)
