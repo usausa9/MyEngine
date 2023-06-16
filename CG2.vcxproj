@@ -158,9 +158,10 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix4.cpp" />
-    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="FBXModel.cpp" />
     <ClCompile Include="MyGame.cpp" />
     <ClCompile Include="Object3D.cpp" />
+    <ClCompile Include="OBJModel.cpp" />
     <ClCompile Include="ParticleManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteManager.cpp" />
@@ -184,9 +185,10 @@
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Matrix4.h" />
-    <ClInclude Include="Model.h" />
+    <ClInclude Include="FBXModel.h" />
     <ClInclude Include="MyGame.h" />
     <ClInclude Include="Object3D.h" />
+    <ClInclude Include="OBJModel.h" />
     <ClInclude Include="ParticleManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteManager.h" />

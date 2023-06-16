@@ -78,7 +78,7 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>ソース ファイル\.cpp\2d</Filter>
     </ClCompile>
-    <ClCompile Include="Model.cpp">
+    <ClCompile Include="FBXModel.cpp">
       <Filter>ソース ファイル\.cpp\3d</Filter>
     </ClCompile>
     <ClCompile Include="Object3D.cpp">
@@ -114,6 +114,9 @@
     <ClCompile Include="FBXObject3D.cpp">
       <Filter>ソース ファイル\.cpp\3d</Filter>
     </ClCompile>
+    <ClCompile Include="OBJModel.cpp">
+      <Filter>ソース ファイル\.cpp\3d</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector2.h">
@@ -143,7 +146,7 @@
     <ClInclude Include="WinAPI.h">
       <Filter>ソース ファイル\.h\base</Filter>
     </ClInclude>
-    <ClInclude Include="Model.h">
+    <ClInclude Include="FBXModel.h">
       <Filter>ソース ファイル\.h\3d</Filter>
     </ClInclude>
     <ClInclude Include="Object3D.h">
@@ -189,6 +192,9 @@
       <Filter>ソース ファイル\.h\base</Filter>
     </ClInclude>
     <ClInclude Include="FBXObject3D.h">
+      <Filter>ソース ファイル\.h\3d</Filter>
+    </ClInclude>
+    <ClInclude Include="OBJModel.h">
       <Filter>ソース ファイル\.h\3d</Filter>
     </ClInclude>
   </ItemGroup>

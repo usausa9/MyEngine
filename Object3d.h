@@ -1,7 +1,7 @@
 #pragma once
 #include "Common.h"
 #include "Vector3.h"
-#include "Model.h"
+#include "OBJModel.h"
 
 // 定数バッファ用データ構造体 (3D変換行列)
 struct Object3DConstBufferDataTransform
@@ -29,7 +29,7 @@ public:
 	// 親オブジェクトへのポインタ
 	Object3D* parent = nullptr;
 
-	Model* model = nullptr;
+	OBJModel* objModel = nullptr;
 
 public:
 	// 3Dオブジェクト初期化

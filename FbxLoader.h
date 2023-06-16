@@ -2,7 +2,7 @@
 #include "fbxsdk.h"
 #include "Common.h"
 
-#include "Model.h"
+#include "FBXModel.h"
 
 #include <d3dx12.h>
 
@@ -60,30 +60,39 @@ public:
 	/// ファイルからFBXモデル読み込み
 	/// </summary>
 	/// <param name="modelName">モデル名</param>
-	Model* LoadModelFromFile(const string& modelName);
+	FBXModel* LoadModelFromFile(const string& modelName);
 
 	/// <summary>
 	/// 再帰的にノード構成を解析
 	/// </summary>
 	/// <param name="model">読み込み先オブジェクト</param>
 	/// <param name="fbxNode">解析対象のノード</param>
-	void ParseNodeRecursive(Model* model, FbxNode* fbxNode, Node* parent = nullptr);
+	void ParseNodeRecursive(FBXModel* model, FbxNode* fbxNode, Node* parent = nullptr);
 
 	/// <summary>
 	/// メッシュ読み取り
 	/// </summary>
 	/// <param name="model">読み込み先モデルオブジェクト</param>
 	/// <param name="fbxNode">解析対象のノード</param>
-	void ParseMesh(Model* model, FbxNode* fbxNode);
+	void ParseMesh(FBXModel* model, FbxNode* fbxNode);
 
 	// 頂点座標読み取り
-	void ParseMeshVertices(Model* model, FbxMesh* fbxMesh);
+	void ParseMeshVertices(FBXModel* model, FbxMesh* fbxMesh);
 	// 面情報読み取り
-	void ParseMeshFaces(Model* model, FbxMesh* fbxMesh);
+	void ParseMeshFaces(FBXModel* model, FbxMesh* fbxMesh);
 	// マテリアル読み取り
-	void ParseMaterial(Model* model, FbxNode* fbxNode);
+	void ParseMaterial(FBXModel* model, FbxNode* fbxNode);
 	// テクスチャ読み取り
-	void LoadTexture(Model* model, const string& fullpath);
+	void LoadTexture(FBXModel* model, const string& fullpath);
+	// スキニング情報読み取り
+	void ParseSkin(FBXModel* model, FbxMesh* fbxMesh);
+
+	/// <summary>
+	/// FBXの行列をMatrix4へ変換
+	/// </summary>
+	/// <param name="dst">書き込み先</param>
+	/// <param name="src">読み込むFBX行列</param>
+	static void ConvertMatrixFromFBX(Matrix4* dst, const FbxAMatrix& src);
 
 	/// <summary>
 	/// シングルトンインスタンスの取得

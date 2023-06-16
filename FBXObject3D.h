@@ -1,8 +1,7 @@
 #pragma once
-
-#include "Model.h"
+#include "FBXModel.h"
+#include "FbxLoader.h"
 #include "Camera.h"
-
 #include "Common.h"
 
 #include <Windows.h>
@@ -13,6 +12,10 @@ protected:	// エイリアス
 	// Microsoft::WRL::を省略
 	template <class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
+public: // 定数
+	// ボーンの最大数
+	static const int MAX_BONES = 32;
+
 public:	// サブクラス
 	// 定数バッファ用データ構造体 (座標変換行列用)
 	struct ConstBufferDataTransform
@@ -20,6 +23,12 @@ public:	// サブクラス
 		Matrix4 viewProjection;	// ビュープロジェクション行列
 		Matrix4 worldTransform;	// ワールド行列
 		Float3  cameraPosition;	// カメラ座標
+	};
+
+	// 定数バッファ用データ構造体 (スキニング)
+	struct ConstBufferDataSkin
+	{
+		Matrix4 bones[MAX_BONES];
 	};
 
 public:	// メンバ関数
@@ -37,7 +46,7 @@ public:	// メンバ関数
 	/// モデルのセット
 	/// </summary>
 	/// <param name="model"> モデル </param>
-	void SetModel(Model* model) { this->model = model; }
+	void SetModel(FBXModel* model) { this->model = model; }
 
 	/// <summary>
 	/// 描画
@@ -48,6 +57,8 @@ public:	// メンバ関数
 protected:	// メンバ変数
 	// 定数バッファ
 	ComPtr<ID3D12Resource> constBuffTransform;
+	// 定数バッファ (スキン)
+	ComPtr<ID3D12Resource> constBuffSkin;
 
 	// ローカルスケール
 	Vector3 scale = { 1,1,1 };
@@ -58,7 +69,7 @@ protected:	// メンバ変数
 	// ローカルワールド変換行列
 	Matrix4 matWorld;
 	// モデル
-	Model* model = nullptr;
+	FBXModel* model = nullptr;
 
 public:	// 静的メンバ関数
 	// setter
@@ -68,7 +79,6 @@ public:	// 静的メンバ関数
 	static void CreateGraphicsPipeline();	// パイプラインの生成
 
 private: // 静的メンバ変数
-	
 	static ID3D12GraphicsCommandList* commandList;	//コマンドリスト
 	static ID3D12Device* device;	// デバイス
 	static Camera* camera;			// カメラ

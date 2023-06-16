@@ -15,9 +15,11 @@ void GameScene::Initialize()
 	// グラフィックスパイプライン生成
 	FBXObject3D::CreateGraphicsPipeline();
 
-	// モデル名を指定してファイル読み込み
+	// モデル名を指定してFBXファイル読み込み
 	model1 = FbxLoader::GetInstance()->LoadModelFromFile("cube");
+	boneTestModel = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
 
+	// テクスチャ読み込み
 	circleTex = TextureManager::Load(L"Resources/circleLight.png");
 	thunderTex = TextureManager::Load(L"Resources/thunder.png");
 	reimuTex = TextureManager::Load(L"Resources/reimu.png");
@@ -31,8 +33,8 @@ void GameScene::Initialize()
 	circleParticle.InitializeParticle();
 	thunderParticle.InitializeParticle();
 
-	icoModel = Model::LoadFromOBJ("Ico");
-	cubeModel = Model::LoadFromOBJ("Cube");
+	icoModel = OBJModel::LoadFromOBJ("Ico");
+	cubeModel = OBJModel::LoadFromOBJ("Cube");
 
 	ico.position = { 2.5f,0,0 };
 	ico.scale = { icoRad,icoRad,icoRad };
@@ -42,24 +44,29 @@ void GameScene::Initialize()
 	ico.InitializeObject3D();
 	cube.InitializeObject3D();
 
-	ico.model = &icoModel;
-	cube.model = &cubeModel;
+	ico.objModel = &icoModel;
+	cube.objModel = &cubeModel;
 
 	// FBXモデル関連
 	object1 = new FBXObject3D;
 	object1->Initialize();
 	object1->SetModel(model1);
 
+	boneTestObject = new FBXObject3D;
+	boneTestObject->Initialize();
+	boneTestObject->SetModel(boneTestModel);
+
 	// カメラ初期化
 	camera->Initialize();
 
-	camera->target = { 0,20,0 };
-	camera->position = { 0,0,-100 };
+	//camera->target = { 0,20,0 };
+	//camera->position = { 0,0,-100 };
 }
 
 void GameScene::Finalize()
 {
 	delete object1;
+	delete boneTestObject;
 	delete model1;
 	delete camera;
 }
@@ -139,6 +146,7 @@ void GameScene::Update()
 
 	
 	object1->Update();
+	boneTestObject->Update();
 
 	camera->Update();
 	thunderParticle.UpdateParticle();
@@ -155,6 +163,7 @@ void GameScene::Draw3D()
 	cube.DrawObject3D();
 
 	object1->Draw();
+	boneTestObject->Draw();
 }
 
 void GameScene::DrawParticle()

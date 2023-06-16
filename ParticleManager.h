@@ -1,7 +1,7 @@
 #pragma once
 #include "Common.h"
 #include "Vector3.h"
-#include "Model.h"
+#include "OBJModel.h"
 #include "Camera.h"
 
 // 定数バッファ用データ構造体 (3D変換行列)

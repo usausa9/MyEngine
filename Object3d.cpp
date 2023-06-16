@@ -71,5 +71,5 @@ void Object3D::DrawObject3D()
 	DirectXBase::Get()->commandList->SetGraphicsRootConstantBufferView(2, constBuffTransform->GetGPUVirtualAddress());
 	
 	// •`‰æI
-	model->Draw();
+	objModel->Draw();
 }

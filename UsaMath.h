@@ -14,7 +14,7 @@
 
 namespace UsaMath
 {
-	const double u_PI = 3.141592653589;
+	const float u_PI = 3.141593f;
 
 	inline float DegreesToRadians(float Degrees)
 	{

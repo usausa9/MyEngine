@@ -8,6 +8,9 @@
 #include "Object3D.h"
 #include "Camera.h"
 
+#include "OBJModel.h"
+#include "FBXModel.h"
+
 #include "FbxLoader.h"
 
 class GameScene
@@ -24,14 +27,17 @@ private:
 	ParticleManager circleParticle;
 	ParticleManager thunderParticle;
 
-	Model icoModel;
-	Model cubeModel;
+	OBJModel icoModel;
+	OBJModel cubeModel;
 
 	Object3D ico;
 	Object3D cube;
 	
-	Model* model1 = nullptr;
+	// FBX
+	FBXModel* model1 = nullptr;
+	FBXModel* boneTestModel = nullptr;
 	FBXObject3D* object1 = nullptr;
+	FBXObject3D* boneTestObject = nullptr;
 
 	Camera* camera = new Camera;
 
