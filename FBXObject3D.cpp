@@ -12,6 +12,9 @@ ComPtr<ID3D12PipelineState> FBXObject3D::pipelineState;
 
 void FBXObject3D::Initialize()
 {
+	// 1フレーム分の時間を60FPSで設定
+	frameTime.SetTime(0,0,0,1,0, FbxTime::EMode::eFrames60);
+
 	HRESULT result;
 	// ヒープ設定/リソース設定
 	D3D12_HEAP_PROPERTIES heapProp{};
@@ -213,9 +216,9 @@ void FBXObject3D::CreateGraphicsPipeline()
 
 void FBXObject3D::Update()
 {
+	// スケール、回転、平行移動行列の計算
 	Matrix4 matScale, matRot, matTrans;
 
-	// スケール、回転、平行移動行列の計算
 	matScale = Matrix4::Identity();
 	matScale.Scale(scale);
 
@@ -270,13 +273,25 @@ void FBXObject3D::Update()
 		// 今の姿勢行列
 		Matrix4 matCurrentPose;
 		// 今の姿勢行列を取得
-		FbxAMatrix fbxCurrentPose = bones[i].fbxCluster->GetLink()->EvaluateGlobalTransform(0);
+		FbxAMatrix fbxCurrentPose = bones[i].fbxCluster->GetLink()->EvaluateGlobalTransform(currentTime);
 		// Matrix4に変換
 		FbxLoader::ConvertMatrixFromFBX(&matCurrentPose, fbxCurrentPose);
 		//合成してスキニング行列に
 		constMapSkin->bones[i] = bones[i].invInitialPose * matCurrentPose;
 	}
 	constBuffSkin->Unmap(0, nullptr);
+
+	// アニメーション用
+	if (isPlay)
+	{
+		// 1フレーム進める
+		currentTime += frameTime;
+		// 最後まで再生したら先頭に戻す
+		if (currentTime > endTime)
+		{
+			currentTime = startTime;
+		}
+	}
 }
 
 void FBXObject3D::Draw()
@@ -300,4 +315,24 @@ void FBXObject3D::Draw()
 
 	// モデル描画
 	model->Draw(commandList);
+}
+
+void FBXObject3D::PlayAnimation()
+{
+	FbxScene* fbxScene = model->GetFbxScene();
+	//0番のアニメーション取得
+	FbxAnimStack* animStack = fbxScene->GetSrcObject<FbxAnimStack>(0);
+	// アニメーションの名前取得
+	const char* animStackName = animStack->GetName();
+	// アニメーションの時間取得
+	FbxTakeInfo* takeInfo = fbxScene->GetTakeInfo(animStackName);
+
+	// 開始時間取得
+	startTime = takeInfo->mLocalTimeSpan.GetStart();
+	// 終了時間取得
+	endTime = takeInfo->mLocalTimeSpan.GetStop();
+	// 開始時間に合わせる
+	currentTime = startTime;
+	// 再生中状態にする
+	isPlay = true;
 }

@@ -66,9 +66,9 @@ void GameScene::Initialize()
 void GameScene::Finalize()
 {
 	delete object1;
-	delete boneTestObject;
 	delete model1;
 	delete camera;
+	delete boneTestObject;
 }
 
 void GameScene::Update()
@@ -143,11 +143,16 @@ void GameScene::Update()
 	{
 		camera->position.y += 0.5f;
 	}
-
 	
 	object1->Update();
-	boneTestObject->Update();
 
+	if (Key::Down(DIK_SPACE))
+	{
+		boneTestObject->PlayAnimation();
+	}
+	
+	boneTestObject->Update();
+	
 	camera->Update();
 	thunderParticle.UpdateParticle();
 	circleParticle.UpdateParticle();
