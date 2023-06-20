@@ -16,32 +16,32 @@
 class GameScene
 {
 private:
-	TextureIndex circleTex;
-	TextureIndex thunderTex;
-	TextureIndex reimuTex;
-	TextureIndex doraTex;
+	//TextureIndex circleTex;
+	//TextureIndex thunderTex;
+	//TextureIndex reimuTex;
+	//TextureIndex doraTex;
 
-	unique_ptr<Sprite> sprite = nullptr;
-	unique_ptr<Sprite> sprite2 = nullptr;
+	//unique_ptr<Sprite> sprite = nullptr;
+	//unique_ptr<Sprite> sprite2 = nullptr;
 
-	ParticleManager circleParticle;
-	ParticleManager thunderParticle;
+	//ParticleManager circleParticle;
+	//ParticleManager thunderParticle;
 
 	OBJModel icoModel;
 	OBJModel cubeModel;
 
-	Object3D ico;
-	Object3D cube;
+	//Object3D ico;
+	//Object3D cube;
 	
 	// FBX
-	FBXModel* model1 = nullptr;
+	//FBXModel* model1 = nullptr;
 	FBXModel* boneTestModel = nullptr;
-	FBXObject3D* object1 = nullptr;
+	//FBXObject3D* object1 = nullptr;
 	FBXObject3D* boneTestObject = nullptr;
 
 	Camera* camera = new Camera;
 
-	float icoRad = 1.f;
+	//float icoRad = 1.f;
 
 public:
 	// èâä˙âª

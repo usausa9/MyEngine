@@ -185,7 +185,7 @@ void FBXObject3D::CreateGraphicsPipeline()
 	descRangeSRV.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0);	// t0 レジスタ
 
 	// ルートパラメータ
-	CD3DX12_ROOT_PARAMETER rootparams[3];
+	CD3DX12_ROOT_PARAMETER rootparams[3] = {};
 	// CBV（座標変換行列用）
 	rootparams[0].InitAsConstantBufferView(0, 0, D3D12_SHADER_VISIBILITY_ALL);
 	// SRV（テクスチャ）
@@ -197,7 +197,7 @@ void FBXObject3D::CreateGraphicsPipeline()
 	CD3DX12_STATIC_SAMPLER_DESC samplerDesc = CD3DX12_STATIC_SAMPLER_DESC(0);
 
 	// ルートシグネチャの設定
-	CD3DX12_VERSIONED_ROOT_SIGNATURE_DESC rootSignatureDesc;
+	CD3DX12_VERSIONED_ROOT_SIGNATURE_DESC rootSignatureDesc{};
 	rootSignatureDesc.Init_1_0(_countof(rootparams), rootparams, 1, &samplerDesc, D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
 
 	ComPtr<ID3DBlob> rootSigBlob;
@@ -216,6 +216,18 @@ void FBXObject3D::CreateGraphicsPipeline()
 
 void FBXObject3D::Update()
 {
+	// アニメーション用
+	if (isPlay)
+	{
+		// 1フレーム進める
+		currentTime += frameTime;
+		// 最後まで再生したら先頭に戻す
+		if (currentTime > endTime)
+		{
+			currentTime = startTime;
+		}
+	}
+
 	// スケール、回転、平行移動行列の計算
 	Matrix4 matScale, matRot, matTrans;
 
@@ -273,25 +285,14 @@ void FBXObject3D::Update()
 		// 今の姿勢行列
 		Matrix4 matCurrentPose;
 		// 今の姿勢行列を取得
-		FbxAMatrix fbxCurrentPose = bones[i].fbxCluster->GetLink()->EvaluateGlobalTransform(currentTime);
+		FbxAMatrix fbxCurrentPose =
+	bones[i].fbxCluster->GetLink()->EvaluateGlobalTransform(currentTime);
 		// Matrix4に変換
 		FbxLoader::ConvertMatrixFromFBX(&matCurrentPose, fbxCurrentPose);
-		//合成してスキニング行列に
+		// 合成してスキニング行列に
 		constMapSkin->bones[i] = bones[i].invInitialPose * matCurrentPose;
 	}
 	constBuffSkin->Unmap(0, nullptr);
-
-	// アニメーション用
-	if (isPlay)
-	{
-		// 1フレーム進める
-		currentTime += frameTime;
-		// 最後まで再生したら先頭に戻す
-		if (currentTime > endTime)
-		{
-			currentTime = startTime;
-		}
-	}
 }
 
 void FBXObject3D::Draw()

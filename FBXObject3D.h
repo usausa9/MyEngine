@@ -72,10 +72,11 @@ protected:	// メンバ変数
 	// ローカル座標
 	Vector3 position = { 0,0,0 };
 	// ローカルワールド変換行列
-	Matrix4 matWorld;
+	Matrix4 matWorld = {};
 	// モデル
 	FBXModel* model = nullptr;
 
+public:
 	// 1フレームの時間
 	FbxTime frameTime;
 	// アニメーション開始時間
