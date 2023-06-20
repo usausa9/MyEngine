@@ -146,10 +146,10 @@ void GameScene::Update()
 	
 	//object1->Update();
 
-	//if (Key::Down(DIK_SPACE))
-	//{
+	if (Key::Down(DIK_SPACE))
+	{
 		boneTestObject->PlayAnimation();
-	//}
+	}
 	
 	boneTestObject->Update();
 	
