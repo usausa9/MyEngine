@@ -22,7 +22,7 @@ Matrix4 Matrix4::Identity(Matrix4 matrix)
 	{
 		for (int j = 0; j < 4; j++)
 		{
-			if (j = i)
+			if (j == i)
 			{
 				matrix.m[j][i] = 1;
 			}
@@ -60,7 +60,7 @@ Matrix4 Matrix4::ScalarProduct(Matrix4 matrix, Vector3 scalar)
 // 行列同士の掛け算
 Matrix4 Matrix4::Matrix4Product(Matrix4 matrix, Matrix4 matrix2)
 {
-	Matrix4 matResult;
+	Matrix4 matResult = {};
 	for (int i = 0; i < 4; i++)
 	{
 		for (int j = 0; j < 4; j++)
@@ -174,9 +174,9 @@ Matrix4 Matrix4::Inverse(const Matrix4 m)
 {
 	// i = 行  j = 列  k = 対角成分が存在する列
 
-	Matrix4 mat;
-	Matrix4 result;
-	Matrix4 identityMatrix;
+	Matrix4 mat = {};
+	Matrix4 result = {};
+	Matrix4 identityMatrix = {};
 
 	mat = m;
 
@@ -184,7 +184,7 @@ Matrix4 Matrix4::Inverse(const Matrix4 m)
 	identityMatrix = Matrix4::Identity();
 
 	// 掃き出し用 右側にでた4*4が結果になる 右側に単位行列を代入
-	float sweep[4][8];
+	float sweep[4][8] = {};
 
 	// 行列の左側に元の行列
 	for (int i = 0; i < 4; i++) 
@@ -272,7 +272,7 @@ Matrix4 Matrix4::Inverse(const Matrix4 m)
 
 Matrix4 Matrix4::CreateViewMat(const Vector3& eye, const Vector3& target, const Vector3& up)
 {
-	Matrix4 result;
+	Matrix4 result = {};
 
 	// カメラのワールド行列を作成
 	Vector3 cameraVecZ = target - eye;
@@ -300,7 +300,7 @@ Matrix4 Matrix4::CreateViewMat(const Vector3& eye, const Vector3& target, const 
 
 Matrix4 Matrix4::CreateProjectionMat(float fovY, float aspectRatio, float nearZ, float farZ)
 {
-	Matrix4 result;
+	Matrix4 result = {};
 
 	float h = 1 / tanf(fovY / 2.0f);
 	float w = h / aspectRatio;
@@ -320,7 +320,7 @@ Matrix4 Matrix4::CreateProjectionMat(float fovY, float aspectRatio, float nearZ,
 
 Matrix4& Matrix4::operator*=(const Matrix4& m2)
 {
-	Matrix4 result{};
+	Matrix4 result = {};
 
 	for (int i = 0; i < 4; i++) 
 	{
@@ -354,7 +354,7 @@ const Matrix4 operator*(const Matrix4& m1, const Matrix4& m2)
 
 const Vector3 operator*(const Vector3& v, const Matrix4& m)
 {
-	Matrix4 result;
+	Matrix4 result = {};
 
 	return result.Transform(v, m);
 }
