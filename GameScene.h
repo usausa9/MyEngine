@@ -16,20 +16,25 @@
 class GameScene
 {
 private:
+	// テクスチャ
 	//TextureIndex circleTex;
 	//TextureIndex thunderTex;
 	//TextureIndex reimuTex;
 	//TextureIndex doraTex;
 
+	// スプライト
 	//unique_ptr<Sprite> sprite = nullptr;
 	//unique_ptr<Sprite> sprite2 = nullptr;
 
+	// パーティクル
 	//ParticleManager circleParticle;
 	//ParticleManager thunderParticle;
 
+	// OBJモデル
 	OBJModel icoModel;
 	OBJModel cubeModel;
 
+	// Object3D
 	//Object3D ico;
 	//Object3D cube;
 	
@@ -39,6 +44,7 @@ private:
 	//FBXObject3D* object1 = nullptr;
 	FBXObject3D* boneTestObject = nullptr;
 
+	// カメラ
 	Camera* camera = new Camera;
 
 	//float icoRad = 1.f;

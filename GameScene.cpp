@@ -14,28 +14,27 @@ void GameScene::Initialize()
 	FBXObject3D::SetCommandList(DirectXBase::Get()->commandList.Get());
 	// グラフィックスパイプライン生成
 	FBXObject3D::CreateGraphicsPipeline();
-
-	// モデル名を指定してFBXファイル読み込み
-	//model1 = FbxLoader::GetInstance()->LoadModelFromFile("cube");
-	boneTestModel = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
-
+	
 	// テクスチャ読み込み
 	//circleTex = TextureManager::Load(L"Resources/circleLight.png");
 	//thunderTex = TextureManager::Load(L"Resources/thunder.png");
 	//reimuTex = TextureManager::Load(L"Resources/reimu.png");
 	//doraTex = TextureManager::Load(L"Resources/texture.png");
 
+	// スプライト・テクスチャ紐づけ
 	//sprite = make_unique<Sprite>(doraTex);
 	//sprite2 = make_unique<Sprite>(reimuTex);
 
+	// パーティクル用のパイプライン・Init
 	ParticleManager::CreatePipeline();
-
 	//circleParticle.InitializeParticle();
 	//thunderParticle.InitializeParticle();
 
+	// OBJ読み込み
 	//icoModel = OBJModel::LoadFromOBJ("Ico");
 	//cubeModel = OBJModel::LoadFromOBJ("Cube");
 
+	// Object3D Init
 	//ico.position = { 2.5f,0,0 };
 	//ico.scale = { icoRad,icoRad,icoRad };
 
@@ -44,10 +43,15 @@ void GameScene::Initialize()
 	//ico.InitializeObject3D();
 	//cube.InitializeObject3D();
 
+	// objとObject3Dの紐付け
 	//ico.objModel = &icoModel;
 	//cube.objModel = &cubeModel;
 
 	// FBXモデル関連
+	// モデル名を指定してFBXファイル読み込み
+	//model1 = FbxLoader::GetInstance()->LoadModelFromFile("cube");
+	boneTestModel = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
+
 	//object1 = new FBXObject3D;
 	//object1->Initialize();
 	//object1->SetModel(model1);
