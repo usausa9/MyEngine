@@ -49,6 +49,24 @@ public:	// メンバ関数
 	void SetModel(FBXModel* model) { this->model = model; }
 
 	/// <summary>
+	/// 位置のセッター
+	/// </summary>
+	/// <param name=" 位置 "></param>
+	void SetPosition(Vector3 position) { this->position = position; }
+
+	/// <summary>
+	/// 大きさのセッター
+	/// </summary>
+	/// <param name=" 大きさ "></param>
+	void SetScale(Vector3 scale) { this->scale = scale; }
+
+	/// <summary>
+	/// 角度のセッター
+	/// </summary>
+	/// <param name=" 回転 "></param>
+	void SetRotation(Vector3 rotation) { this->rotation = rotation * (UsaMath::u_PI / 180); }
+
+	/// <summary>
 	/// 描画
 	/// </summary>
 	/// <param name="cmdList"></param>

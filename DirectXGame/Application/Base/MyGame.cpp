@@ -255,14 +255,14 @@ void MyGame::Initialize()
 	assert(SUCCEEDED(result));
 
 	TextureManager::Init();
-	FbxLoader::GetInstance()->Initialize(DirectXBase::Get()->device.Get());
+	FBXLoader::GetInstance()->Initialize(DirectXBase::Get()->device.Get());
 
 	scene.Initialize();
 }
 
 void MyGame::Finalize()
 {
-	FbxLoader::GetInstance()->Finalize();
+	FBXLoader::GetInstance()->Finalize();
 	TextureManager::Release();
 
 	scene.Finalize();

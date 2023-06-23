@@ -181,7 +181,7 @@ void FBXObject3D::CreateGraphicsPipeline()
 	gpipeline.SampleDesc.Count = 1;	// 1ピクセルにつき1回サンプリング
 
 	// デスクリプタレンジ
-	CD3DX12_DESCRIPTOR_RANGE descRangeSRV;
+	CD3DX12_DESCRIPTOR_RANGE descRangeSRV{};
 	descRangeSRV.Init(D3D12_DESCRIPTOR_RANGE_TYPE_SRV, 1, 0);	// t0 レジスタ
 
 	// ルートパラメータ
@@ -234,17 +234,10 @@ void FBXObject3D::Update()
 	matScale = Matrix4::Identity();
 	matScale.Scale(scale);
 
-	Matrix4 rotX, rotY, rotZ;
 	matRot = Matrix4::Identity();
-	rotX = Matrix4::Identity();
-	rotY = Matrix4::Identity();
-	rotZ = Matrix4::Identity();
-	rotZ.RotateZ(rotation.z);
-	rotX.RotateX(rotation.x);
-	rotY.RotateY(rotation.y);
-	matRot *= rotZ;
-	matRot *= rotX;
-	matRot *= rotY;
+	matRot *= matRot.RotateZ(rotation.z);
+	matRot *= matRot.RotateX(rotation.x);
+	matRot *= matRot.RotateY(rotation.y);
 
 	matTrans = Matrix4::Identity();
 	matTrans.Translate(position);
@@ -288,7 +281,7 @@ void FBXObject3D::Update()
 		FbxAMatrix fbxCurrentPose =
 	bones[i].fbxCluster->GetLink()->EvaluateGlobalTransform(currentTime);
 		// Matrix4に変換
-		FbxLoader::ConvertMatrixFromFBX(&matCurrentPose, fbxCurrentPose);
+		FBXLoader::ConvertMatrixFromFBX(&matCurrentPose, fbxCurrentPose);
 		// 合成してスキニング行列に
 		constMapSkin->bones[i] = bones[i].invInitialPose * matCurrentPose;
 	}

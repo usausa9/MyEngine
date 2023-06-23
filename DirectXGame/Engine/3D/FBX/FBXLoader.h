@@ -9,7 +9,7 @@
 #include <cassert>
 #include <string>
 
-class FbxLoader
+class FBXLoader
 {
 public: // 定数
 	// モデル格納ルートパス
@@ -20,19 +20,19 @@ public: // 定数
 
 private:
 	// コピー代入演算子を禁止（シングルトンパターン）
-	void operator=(const FbxLoader& obj) = delete;
+	void operator=(const FBXLoader& obj) = delete;
 
 	// ディレクトリを含んだファイルパスからファイル名を抽出する
 	string ExtractFileName(const string& path);
 
 	// privateなコンストラクタ（シングルトンパターン）
-	FbxLoader() = default;
+	FBXLoader() = default;
 
 	// privateなデストラクタ（シングルトンパターン）
-	~FbxLoader() = default;
+	~FBXLoader() = default;
 
 	// コピーコンストラクタを禁止（シングルトンパターン）
-	FbxLoader(const FbxLoader& obj) = delete;
+	FBXLoader(const FBXLoader& obj) = delete;
 
 private:
 	// D3D12デバイス
@@ -98,5 +98,5 @@ public:
 	/// シングルトンインスタンスの取得
 	/// </summary>
 	/// <returns>インスタンス</returns>
-	static FbxLoader* GetInstance();
+	static FBXLoader* GetInstance();
 };

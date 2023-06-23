@@ -78,12 +78,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)DirectXTex;$(ProjectDir)lib\fbx_sdk\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)External\DirectXTex;$(ProjectDir)lib\fbx_sdk\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)lib\fbx_sdk\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)DirectXTex;$(ProjectDir)lib\fbx_sdk\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)External\DirectXTex;$(ProjectDir)lib\fbx_sdk\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)lib\fbx_sdk\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -121,6 +121,7 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalIncludeDirectories>$(ProjectDir)DirectXGame\Application\Base;$(ProjectDir)DirectXGame\Application\Scene;$(ProjectDir)DirectXGame\Engine\2D;$(ProjectDir)DirectXGame\Engine\2D_3D;$(ProjectDir)DirectXGame\Engine\3D;$(ProjectDir)DirectXGame\Engine\Audio;$(ProjectDir)DirectXGame\Engine\Base;$(ProjectDir)DirectXGame\Engine\Base\Math;$(ProjectDir)DirectXGame\Engine\IO;$(ProjectDir)DirectXGame\Engine;$(ProjectDir)DirectXGame\Application;$(ProjectDir)DirectXGame\Engine\3D\FBX;$(ProjectDir)DirectXGame\Engine\3D\OBJ;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -139,6 +140,7 @@
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <AdditionalIncludeDirectories>$(ProjectDir)DirectXGame\Application\Base;$(ProjectDir)DirectXGame\Application\Scene;$(ProjectDir)DirectXGame\Engine\2D;$(ProjectDir)DirectXGame\Engine\2D_3D;$(ProjectDir)DirectXGame\Engine\3D;$(ProjectDir)DirectXGame\Engine\Audio;$(ProjectDir)DirectXGame\Engine\Base;$(ProjectDir)DirectXGame\Engine\Base\Math;$(ProjectDir)DirectXGame\Engine\IO;$(ProjectDir)DirectXGame\Engine;$(ProjectDir)DirectXGame\Application;$(ProjectDir)DirectXGame\Engine\3D\FBX;$(ProjectDir)DirectXGame\Engine\3D\OBJ;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -150,61 +152,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="CollisionPrimitive.cpp" />
-    <ClCompile Include="DirectXBase.cpp" />
-    <ClCompile Include="FbxLoader.cpp" />
-    <ClCompile Include="FBXObject3D.cpp" />
-    <ClCompile Include="GameScene.cpp" />
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Matrix4.cpp" />
-    <ClCompile Include="FBXModel.cpp" />
-    <ClCompile Include="MyGame.cpp" />
-    <ClCompile Include="Object3D.cpp" />
-    <ClCompile Include="OBJModel.cpp" />
-    <ClCompile Include="ParticleManager.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="SpriteManager.cpp" />
-    <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="Vector2.cpp" />
-    <ClCompile Include="Vector3.cpp" />
-    <ClCompile Include="Vector4.cpp" />
-    <ClCompile Include="WinAPI.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Collision.h" />
-    <ClInclude Include="CollisionPrimitive.h" />
-    <ClInclude Include="Common.h" />
-    <ClInclude Include="DirectXBase.h" />
-    <ClInclude Include="FbxLoader.h" />
-    <ClInclude Include="FBXObject3D.h" />
-    <ClInclude Include="Float2.h" />
-    <ClInclude Include="Float3.h" />
-    <ClInclude Include="Float4.h" />
-    <ClInclude Include="GameScene.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="Matrix4.h" />
-    <ClInclude Include="FBXModel.h" />
-    <ClInclude Include="MyGame.h" />
-    <ClInclude Include="Object3D.h" />
-    <ClInclude Include="OBJModel.h" />
-    <ClInclude Include="ParticleManager.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="SpriteManager.h" />
-    <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="UsaMath.h" />
-    <ClInclude Include="Vector2.h" />
-    <ClInclude Include="Vector3.h" />
-    <ClInclude Include="Vector4.h" />
-    <ClInclude Include="WinAPI.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj">
-      <Project>{371b9fa9-4c90-4ac6-a123-aced756d6c77}</Project>
-    </ProjectReference>
+    <ClInclude Include="DirectXGame\Engine\3D\Camera.h" />
+    <ClInclude Include="DirectXGame\Engine\2D_3D\Collision.h" />
+    <ClInclude Include="DirectXGame\Engine\2D_3D\CollisionPrimitive.h" />
+    <ClInclude Include="DirectXGame\Engine\Base\Common.h" />
+    <ClInclude Include="DirectXGame\Engine\Base\DirectXBase.h" />
+    <ClInclude Include="DirectXGame\Engine\3D\FBX\FBXLoader.h" />
+    <ClInclude Include="DirectXGame\Engine\3D\FBX\FBXObject3D.h" />
+    <ClInclude Include="DirectXGame\Engine\Base\Math\Float2.h" />
+    <ClInclude Include="DirectXGame\Engine\Base\Math\Float3.h" />
+    <ClInclude Include="DirectXGame\Engine\Base\Math\Float4.h" />
+    <ClInclude Include="DirectXGame\Application\Scene\GameScene.h" />
+    <ClInclude Include="DirectXGame\Engine\IO\Input.h" />
+    <ClInclude Include="DirectXGame\Engine\Base\Math\Matrix4.h" />
+    <ClInclude Include="DirectXGame\Engine\3D\FBX\FBXModel.h" />
+    <ClInclude Include="DirectXGame\Application\Base\MyGame.h" />
+    <ClInclude Include="DirectXGame\Engine\3D\OBJ\Object3D.h" />
+    <ClInclude Include="DirectXGame\Engine\3D\OBJ\OBJModel.h" />
+    <ClInclude Include="DirectXGame\Engine\2D_3D\ParticleManager.h" />
+    <ClInclude Include="DirectXGame\Engine\2D\Sprite.h" />
+    <ClInclude Include="DirectXGame\Engine\2D\SpriteManager.h" />
+    <ClInclude Include="DirectXGame\Engine\2D_3D\TextureManager.h" />
+    <ClInclude Include="DirectXGame\Engine\Base\Math\UsaMath.h" />
+    <ClInclude Include="DirectXGame\Engine\Base\Math\Vector2.h" />
+    <ClInclude Include="DirectXGame\Engine\Base\Math\Vector3.h" />
+    <ClInclude Include="DirectXGame\Engine\Base\Math\Vector4.h" />
+    <ClInclude Include="DirectXGame\Engine\Base\WinAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\Basic.hlsli" />
@@ -267,6 +240,35 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DirectXGame\Engine\3D\Camera.cpp" />
+    <ClCompile Include="DirectXGame\Engine\2D_3D\Collision.cpp" />
+    <ClCompile Include="DirectXGame\Engine\2D_3D\CollisionPrimitive.cpp" />
+    <ClCompile Include="DirectXGame\Engine\Base\DirectXBase.cpp" />
+    <ClCompile Include="DirectXGame\Engine\3D\FBX\FBXLoader.cpp" />
+    <ClCompile Include="DirectXGame\Engine\3D\FBX\FBXModel.cpp" />
+    <ClCompile Include="DirectXGame\Engine\3D\FBX\FBXObject3D.cpp" />
+    <ClCompile Include="DirectXGame\Application\Scene\GameScene.cpp" />
+    <ClCompile Include="DirectXGame\Engine\IO\Input.cpp" />
+    <ClCompile Include="DirectXGame\main.cpp" />
+    <ClCompile Include="DirectXGame\Engine\Base\Math\Matrix4.cpp" />
+    <ClCompile Include="DirectXGame\Application\Base\MyGame.cpp" />
+    <ClCompile Include="DirectXGame\Engine\3D\OBJ\Object3d.cpp" />
+    <ClCompile Include="DirectXGame\Engine\3D\OBJ\OBJModel.cpp" />
+    <ClCompile Include="DirectXGame\Engine\2D_3D\ParticleManager.cpp" />
+    <ClCompile Include="DirectXGame\Engine\2D\Sprite.cpp" />
+    <ClCompile Include="DirectXGame\Engine\2D\SpriteManager.cpp" />
+    <ClCompile Include="DirectXGame\Engine\2D_3D\TextureManager.cpp" />
+    <ClCompile Include="DirectXGame\Engine\Base\Math\Vector2.cpp" />
+    <ClCompile Include="DirectXGame\Engine\Base\Math\Vector3.cpp" />
+    <ClCompile Include="DirectXGame\Engine\Base\Math\Vector4.cpp" />
+    <ClCompile Include="DirectXGame\Engine\Base\WinAPI.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="External\DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj">
+      <Project>{371b9fa9-4c90-4ac6-a123-aced756d6c77}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

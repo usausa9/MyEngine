@@ -37,7 +37,7 @@ public: // 定数
 
 public:
 	// フレンドクラス
-	friend class FbxLoader;
+	friend class FBXLoader;
 
 	// ボーン構造体
 	struct Bone
