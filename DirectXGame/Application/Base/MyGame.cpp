@@ -36,6 +36,13 @@ void MyGame::Initialize()
 	spriteManager = make_unique<SpriteManager>();
 	spriteManager->Init();
 
+	TextureManager::Init();
+
+	// ポストエフェクト用テクスチャの読み込み
+	postTex = TextureManager::Load(L"Resources/texture.png");
+
+	postEffect = make_unique<PostEffect>(postTex);
+
 #pragma endregion
 
 #pragma region 描画初期化処理
@@ -224,6 +231,8 @@ void MyGame::Initialize()
 	samplerDesc.ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER;
 	samplerDesc.ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;	// ピクセルシェーダーからのみ使用可能
 
+#pragma endregion
+
 	// ルートシグネチャの設定
 	D3D12_ROOT_SIGNATURE_DESC rootSignatureDesc{};
 	rootSignatureDesc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
@@ -254,17 +263,18 @@ void MyGame::Initialize()
 	result = DirectXBase::Get()->device->CreateGraphicsPipelineState(&pipelineDesc, IID_PPV_ARGS(&pipelineState));
 	assert(SUCCEEDED(result));
 
-	TextureManager::Init();
+	
 	FBXLoader::GetInstance()->Initialize(DirectXBase::Get()->device.Get());
 
 	scene.Initialize();
+	
 }
 
 void MyGame::Finalize()
 {
 	FBXLoader::GetInstance()->Finalize();
 	TextureManager::Release();
-
+	
 	scene.Finalize();
 }
 
@@ -329,15 +339,16 @@ void MyGame::Draw()
 	PreDraw();
 
 	// 3D描画
-	scene.Draw3D();
+	//scene.Draw3D();
 
 	// パーティクル描画前処理 + 描画処理
 	PreDrawParticle();
-	scene.DrawParticle();
+	//scene.DrawParticle();
 
 	// 2D描画
 	spriteManager->PreDraw();
-	scene.Draw2D();
+	//scene.Draw2D();
+	postEffect->Draw(DirectXBase::Get()->commandList.Get());
 
 	// 描画後処理
 	PostDraw();

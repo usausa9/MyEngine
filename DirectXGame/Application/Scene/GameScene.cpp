@@ -16,8 +16,10 @@ void GameScene::Initialize()
 	FBXObject3D::CreateGraphicsPipeline();
 	
 	// テクスチャ読み込み
+	//doraTex = TextureManager::Load(L"Resources/texture.png");
 
 	// スプライト・テクスチャ紐づけ
+	//sprite = make_unique<Sprite>(doraTex);
 
 	// パーティクル用のパイプライン・Init
 	ParticleManager::CreatePipeline();
@@ -101,8 +103,8 @@ void GameScene::Update()
 	//	circleParticle.Add(60, pos, vel, acc, 1.5f, 0.0f);
 	//}
 
-	//sprite->position = { 130,130 };
-	//sprite->Update();
+//	sprite->position = { 130,130 };
+//	sprite->Update();
 
 	//sprite2->position = { 1050,190 };
 	//sprite2->Update();

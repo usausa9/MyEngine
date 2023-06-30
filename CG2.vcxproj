@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DirectXGame\Engine\2D\PostEffect.h" />
     <ClInclude Include="DirectXGame\Engine\3D\Camera.h" />
     <ClInclude Include="DirectXGame\Engine\2D_3D\Collision.h" />
     <ClInclude Include="DirectXGame\Engine\2D_3D\CollisionPrimitive.h" />
@@ -264,6 +265,7 @@
     <ClCompile Include="DirectXGame\Engine\Base\Math\Vector3.cpp" />
     <ClCompile Include="DirectXGame\Engine\Base\Math\Vector4.cpp" />
     <ClCompile Include="DirectXGame\Engine\Base\WinAPI.cpp" />
+    <ClCompile Include="DirectXGame\Engine\2D\PostEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="External\DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj">

@@ -17,8 +17,10 @@ class GameScene
 {
 private:
 	// テクスチャ
+	TextureIndex doraTex;
 
 	// スプライト
+	unique_ptr<Sprite> sprite = nullptr;
 
 	// パーティクル
 

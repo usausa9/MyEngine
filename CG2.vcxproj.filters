@@ -171,6 +171,9 @@
     <ClInclude Include="DirectXGame\Application\Scene\GameScene.h">
       <Filter>1.ソース ファイル\Application\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="DirectXGame\Engine\2D\PostEffect.h">
+      <Filter>2.ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\Basic.hlsli">
@@ -281,6 +284,9 @@
     </ClCompile>
     <ClCompile Include="DirectXGame\Engine\2D_3D\TextureManager.cpp">
       <Filter>1.ソース ファイル\Engine\2D/3D</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXGame\Engine\2D\PostEffect.cpp">
+      <Filter>1.ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

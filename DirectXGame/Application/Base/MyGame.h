@@ -11,6 +11,7 @@
 #include "FbxLoader.h"
 
 #include "GameScene.h"
+#include "PostEffect.h"
 
 #include <Windows.h>
 #include <cmath>
@@ -64,5 +65,8 @@ private: // メンバ変数
 
 	// WindowsAPI初期化
 	WinAPI& window = *WinAPI::Get();
-};
 
+	// ポストエフェクト
+	TextureIndex postTex;
+	unique_ptr<PostEffect> postEffect = nullptr;
+};

@@ -4,8 +4,6 @@
 
 #include "WinAPI.h"
 
-
-
 // 頂点データ構造体
 struct Vertex
 {
@@ -21,6 +19,11 @@ Sprite::Sprite()
 Sprite::Sprite(TextureIndex tex) : tIndex(tex)
 {
 	Init();
+}
+
+Sprite::Sprite(TextureIndex texIndex, Float2 pos, Float2 scale_, Float4 color_, Float2 anchorP, bool isFlipX_, bool isFlipY_) :
+	tIndex(texIndex), position(pos), color(color_), anchorPoint(anchorP), scale(scale_), isFlipX(isFlipX_), isFlipY(isFlipY_)
+{
 }
 
 Sprite::~Sprite()
