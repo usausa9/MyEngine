@@ -24,7 +24,7 @@ void PostEffect::Initialize()
 		DXGI_FORMAT_R8G8B8A8_UNORM_SRGB,
 		WinAPI::Get()->width,
 		(UINT)WinAPI::Get()->height,
-		1, 1, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET
+		1, 0, 1, 0, D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET
 	);
 
 	// ÉqÅ[Évê›íË
