@@ -39,9 +39,10 @@ void MyGame::Initialize()
 	TextureManager::Init();
 
 	// ポストエフェクト用テクスチャの読み込み
-	postTex = TextureManager::Load(L"Resources/texture.png");
+	postTex = TextureManager::Load(L"Resources/white1x1.png");
 
 	postEffect = make_unique<PostEffect>(postTex);
+	postEffect.get()->Initialize();
 
 #pragma endregion
 
