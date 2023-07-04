@@ -312,9 +312,6 @@ void MyGame::PreDraw()
 	DirectXBase::Get()->commandList->SetDescriptorHeaps(1, TextureManager::srvHeap.GetAddressOf());
 
 	//DirectXBase::Get()->commandList->SetGraphicsRootDescriptorTable(1, TextureManager::GetData(reimuTex)->gpuHandle);
-
-	// DirectX 描画前処理
-	DirectXBase::Get()->PreDraw();
 }
 
 void MyGame::PreDrawParticle()
@@ -336,19 +333,28 @@ void MyGame::PreDrawParticle()
 
 void MyGame::Draw()
 {
-	// 描画前処理
-	PreDraw();
+	// レンダーテクスチャへの描画
+	postEffect.get()->PreDrawScene(DirectXBase::Get()->commandList.Get());
 
-	// 3D描画
-	//scene.Draw3D();
+	// 3D描画前処理 + 3D描画
+	PreDraw();
+	scene.Draw3D();
 
 	// パーティクル描画前処理 + 描画処理
 	PreDrawParticle();
-	//scene.DrawParticle();
+	scene.DrawParticle();
 
-	// 2D描画
+	// 2D描画前処理 + 2D描画
 	spriteManager->PreDraw();
-	//scene.Draw2D();
+	scene.Draw2D();
+
+	// レンダーテクスチャへの描画
+	postEffect.get()->PostDrawScene(DirectXBase::Get()->commandList.Get());
+
+	// DirectX描画前処理
+	DirectXBase::Get()->PreDraw();
+
+	// ポストエフェクト描画
 	postEffect->Draw(DirectXBase::Get()->commandList.Get());
 
 	// 描画後処理
