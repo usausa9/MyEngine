@@ -57,7 +57,7 @@ void PostEffect::Initialize()
 		const UINT depthPitch = rowPitch * WinAPI::Get()->height;
 		// 画像イメージ
 		UINT* img = new UINT[pixelCount];
-		for (unsigned int i = 0; i < pixelCount; i++) { img[i] = 0x00000000; }
+		for (unsigned int i = 0; i < pixelCount; i++) { img[i] = 0xff0000ff; }
 
 		// テクスチャバッファにデータ転送
 		result = texBuff->WriteToSubresource(0, nullptr,
