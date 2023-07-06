@@ -54,7 +54,7 @@ void PostEffect::Initialize()
 		const UINT depthPitch = rowPitch * WinAPI::Get()->height;
 		// 画像イメージ
 		UINT* img = new UINT[pixelCount];
-		for (unsigned int i = 0; i < pixelCount; i++) { img[i] = 0x00000000; }
+		for (unsigned int i = 0; i < pixelCount; i++) { img[i] = 0xff0000ff; }
 
 		// テクスチャバッファにデータ転送
 		result = texBuff->WriteToSubresource(0, nullptr,
@@ -90,7 +90,12 @@ void PostEffect::Draw(ID3D12GraphicsCommandList* commandList)
 	//ID3D12GraphicsCommandList* commandList = DirectXBase::Get()->commandList.Get();
 	Update();
 
+	// デスクリプタヒープのセット
 	ID3D12DescriptorHeap* ppHeaps[] = { descHeapSRV.Get() };
+	commandList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
+
+	commandList->SetGraphicsRootDescriptorTable(1, descHeapSRV->GetGPUDescriptorHandleForHeapStart());
+
 
 	// 頂点バッファビューの設定コマンド
 	commandList->IASetVertexBuffers(0, 1, &vbView);
@@ -98,8 +103,7 @@ void PostEffect::Draw(ID3D12GraphicsCommandList* commandList)
 	// CBVの設定コマンド
 	commandList->SetGraphicsRootConstantBufferView(0, constBuffMaterial->GetGPUVirtualAddress());
 	//commandList->SetGraphicsRootDescriptorTable(1, TextureManager::GetData(tIndex)->gpuHandle);
-	commandList->SetGraphicsRootDescriptorTable(1,descHeapSRV->GetGPUDescriptorHandleForHeapStart());
-
+	
 	// 描画コマンド
 	commandList->DrawInstanced(4, 1, 0, 0); // 全ての頂点を使って描画
 }
