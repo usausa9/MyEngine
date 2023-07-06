@@ -3,7 +3,7 @@
 #include "DirectXBase.h"
 
 // 静的メンバ変数の実体
-const float PostEffect::clearColor[4] = { 0.25f,0.5f,0.1f,0.0f }; // RGBA 緑っぽい色
+const float PostEffect::clearColor[4] = { 0.25f,0.5f,0.1f,1.0f }; // RGBA 緑っぽい色
 
 PostEffect::PostEffect(TextureIndex tex) : Sprite(tex = tIndex,
 	{ 250, 250 },	// pos
