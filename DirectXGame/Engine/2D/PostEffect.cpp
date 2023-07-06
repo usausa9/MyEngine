@@ -158,6 +158,12 @@ void PostEffect::Draw(ID3D12GraphicsCommandList* commandList)
 
 	ID3D12DescriptorHeap* ppHeaps[] = { descHeapSRV.Get() };
 
+	// SRVのセット
+	commandList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
+
+	// SRVヒープの設定コマンド
+	//commandList->SetDescriptorHeaps(1, TextureManager::srvHeap.GetAddressOf());
+
 	// 頂点バッファビューの設定コマンド
 	commandList->IASetVertexBuffers(0, 1, &vbView);
 
