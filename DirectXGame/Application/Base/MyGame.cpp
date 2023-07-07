@@ -348,6 +348,8 @@ void MyGame::Draw()
 	//spriteManager->PreDraw();
 	//scene.Draw2D();
 
+	
+
 	// レンダーテクスチャへの描画
 	postEffect.get()->PostDrawScene(DirectXBase::Get()->commandList.Get());
 

@@ -216,6 +216,9 @@ void PostEffect::Draw(ID3D12GraphicsCommandList* commandList)
 		this->constBuff->Unmap(0, nullptr);
 	}
 
+	// パイプラインステートの設定
+	commandList->SetPipelineState(pipelineState.Get());
+
 	ID3D12DescriptorHeap* ppHeaps[] = { descHeapSRV.Get() };
 
 	// SRVのセット
