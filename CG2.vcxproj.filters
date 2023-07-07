@@ -171,7 +171,7 @@
     <ClInclude Include="DirectXGame\Application\Scene\GameScene.h">
       <Filter>1.ソース ファイル\Application\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="DirectXGame\Engine\2D\PostEffect.h">
+    <ClInclude Include="DirectXGame\Engine\2D_3D\PostEffect.h">
       <Filter>2.ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
@@ -285,7 +285,7 @@
     <ClCompile Include="DirectXGame\Engine\2D_3D\TextureManager.cpp">
       <Filter>1.ソース ファイル\Engine\2D/3D</Filter>
     </ClCompile>
-    <ClCompile Include="DirectXGame\Engine\2D\PostEffect.cpp">
+    <ClCompile Include="DirectXGame\Engine\2D_3D\PostEffect.cpp">
       <Filter>1.ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

@@ -16,10 +16,10 @@ void GameScene::Initialize()
 	FBXObject3D::CreateGraphicsPipeline();
 	
 	// テクスチャ読み込み
-	//doraTex = TextureManager::Load(L"Resources/texture.png");
+	doraTex = TextureManager::Load(L"Resources/texture.png");
 
 	// スプライト・テクスチャ紐づけ
-	//sprite = make_unique<Sprite>(doraTex);
+	sprite = make_unique<Sprite>(doraTex);
 
 	// パーティクル用のパイプライン・Init
 	ParticleManager::CreatePipeline();
@@ -42,7 +42,7 @@ void GameScene::Initialize()
 	camera->Initialize();
 
 	camera->target = { 0,2.5f,0 };
-	camera->position = { 0,0,8.0f };
+	camera->position = { 0,0,-8.0f };
 	boneTestObject->SetRotation({ 0,90,0 });
 }
 
@@ -103,8 +103,8 @@ void GameScene::Update()
 	//	circleParticle.Add(60, pos, vel, acc, 1.5f, 0.0f);
 	//}
 
-//	sprite->position = { 130,130 };
-//	sprite->Update();
+	sprite->position = { 130,130 };
+	sprite->Update();
 
 	//sprite2->position = { 1050,190 };
 	//sprite2->Update();
@@ -166,6 +166,6 @@ void GameScene::DrawParticle()
 
 void GameScene::Draw2D()
 {
-	//sprite->Draw();
+	sprite->Draw();
 	//sprite2->Draw();
 }

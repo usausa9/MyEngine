@@ -28,7 +28,7 @@ Sprite::Sprite(TextureIndex texIndex, Float2 pos, Float2 scale_, Float4 color_, 
 
 Sprite::~Sprite()
 {
-	constBuffMaterial->Unmap(0, nullptr);	//  メモリリークは罪
+	//constBuffMaterial->Unmap(0, nullptr);	//  メモリリークは罪
 }
 
 void Sprite::Init()

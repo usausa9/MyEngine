@@ -39,9 +39,9 @@ void MyGame::Initialize()
 	TextureManager::Init();
 
 	// ポストエフェクト用テクスチャの読み込み
-	postTex = TextureManager::Load(L"Resources/white1x1.png");
+	//postTex = TextureManager::Load(L"Resources/white1x1.png");
 
-	postEffect = make_unique<PostEffect>(postTex);
+	postEffect = make_unique<PostEffect>();
 	postEffect.get()->Initialize();
 
 #pragma endregion
@@ -344,9 +344,9 @@ void MyGame::Draw()
 	PreDrawParticle();
 	scene.DrawParticle();
 
-	// 2D描画前処理 + 2D描画
-	spriteManager->PreDraw();
-	scene.Draw2D();
+	//// 2D描画前処理 + 2D描画
+	//spriteManager->PreDraw();
+	//scene.Draw2D();
 
 	// レンダーテクスチャへの描画
 	postEffect.get()->PostDrawScene(DirectXBase::Get()->commandList.Get());

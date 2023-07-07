@@ -230,6 +230,7 @@ void FBXObject3D::Update()
 
 	// スケール、回転、平行移動行列の計算
 	Matrix4 matScale, matRot, matTrans;
+	HRESULT result;
 
 	matScale = Matrix4::Identity();
 	matScale.Scale(scale);
@@ -255,7 +256,6 @@ void FBXObject3D::Update()
 	// カメラ座標
 	const Float3& cameraPos = camera->GetEye();
 
-	HRESULT result;
 	// 定数バッファへデータ転送
 	ConstBufferDataTransform* constMap = nullptr;
 	result = constBuffTransform->Map(0, nullptr, (void**)&constMap);

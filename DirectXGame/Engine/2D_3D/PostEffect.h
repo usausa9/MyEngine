@@ -4,11 +4,29 @@
 
 class PostEffect : public Sprite
 {
-public:
+private: // サブクラス
+
+	struct VertexPosUv 
+	{
+		Float3 pos;	// xyz座標
+		Float2 uv;	// uv 座標
+	};
+
+	struct ConstBufferData 
+	{
+		Float4 color;
+		Matrix4 mat;
+	};
+
+private: // 静的メンバ変数
+	// 画面クリアカラー
+	static const float clearColor[4];
+
+public:	// メンバ関数
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	PostEffect(TextureIndex tex);
+	PostEffect();
 
 	/// <summary>
 	/// 初期化
@@ -33,15 +51,15 @@ public:
 	/// <param name="commandList">コマンドリスト</param>
 	void PostDrawScene(ID3D12GraphicsCommandList* commandList);
 
-private:
-	// テクスチャバッファ
+private: // DirectX ポインタ類
+	// バッファ類
 	ComPtr<ID3D12Resource> texBuff = nullptr;
+	ComPtr<ID3D12Resource> constBuff = nullptr;
+	ComPtr<ID3D12Resource> vertBuff = nullptr;
+	ComPtr<ID3D12Resource> depthBuff = nullptr;
 
 	// SRV用デスクリプタヒープ
 	ComPtr<ID3D12DescriptorHeap> descHeapSRV = nullptr;
-
-	// 深度バッファ
-	ComPtr<ID3D12Resource> depthBuff = nullptr;
 
 	// RTV用デスクリプタヒープ
 	ComPtr<ID3D12DescriptorHeap> descHeapRTV = nullptr;
@@ -49,6 +67,5 @@ private:
 	// DSV用デスクリプタヒープ
 	ComPtr<ID3D12DescriptorHeap> descHeapDSV = nullptr;
 
-	// 画面クリアカラー
-	static const float clearColor[4];
+	D3D12_VERTEX_BUFFER_VIEW vbView{};
 };

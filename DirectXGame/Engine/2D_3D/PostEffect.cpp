@@ -5,20 +5,69 @@
 // 静的メンバ変数の実体
 const float PostEffect::clearColor[4] = { 0.25f,0.5f,0.1f,1.0f }; // RGBA 緑っぽい色
 
-PostEffect::PostEffect(TextureIndex tex) : Sprite(tex = tIndex,
-	{ 250, 250 },	// pos
-	{ 500.0f,500.0f },	// size
-	{ 1.0f,1.0f,1.0f,1.0f },	// color
-	{ 0.0f, 0.0f },	// anclePoint
-	false, false
-) { }
+PostEffect::PostEffect()
+{ 
+
+}
 
 void PostEffect::Initialize()
 {
 	HRESULT result;
 
 	// 基底クラス
-	Sprite::Init();
+	// Sprite::Init();
+
+	// 頂点データ
+	VertexPosUv vertices[]
+	{
+		{{-0.5f, -0.5f, 0.0f}, {0.0f, 1.0f}},
+		{{-0.5f, +0.5f, 0.0f}, {0.0f, 0.0f}},
+		{{+0.5f, -0.5f, 0.0f}, {1.0f, 1.0f}},
+		{{+0.5f, +0.5f, 0.0f}, {1.0f, 0.0f}},
+	};
+
+	// バッファ用ヒープ設定
+	CD3DX12_HEAP_PROPERTIES heapProp(D3D12_HEAP_TYPE_UPLOAD);
+
+	// 頂点バッファ用設定
+	CD3DX12_RESOURCE_DESC vertResDesc = CD3DX12_RESOURCE_DESC::Buffer(sizeof(VertexPosUv) * _countof(vertices));
+
+	// 頂点バッファ生成
+	result = DirectXBase::Get()->device->CreateCommittedResource(
+		&heapProp,
+		D3D12_HEAP_FLAG_NONE,
+		&vertResDesc,
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		nullptr,
+		IID_PPV_ARGS(&vertBuff));
+	assert(SUCCEEDED(result));
+
+	// 頂点バッファへのデータ転送
+	VertexPosUv* vertMap = nullptr;
+	result = vertBuff->Map(0, nullptr, (void**)&vertMap);
+	if (SUCCEEDED(result)) 
+	{
+		memcpy(vertMap, vertices, sizeof(vertices));
+		vertBuff->Unmap(0, nullptr);
+	}
+
+	// 頂点バッファビューの設定
+	vbView.BufferLocation = vertBuff->GetGPUVirtualAddress();
+	vbView.SizeInBytes = sizeof(VertexPosUv) * 4;
+	vbView.StrideInBytes = sizeof(VertexPosUv);
+
+	// 定数バッファ用リソース設定
+	CD3DX12_RESOURCE_DESC constResDesc = CD3DX12_RESOURCE_DESC::Buffer((sizeof(ConstBufferData) + 0xff) & ~0xff);
+
+	// 定数バッファ生成
+	result = DirectXBase::Get()->device->CreateCommittedResource(
+		&heapProp,
+		D3D12_HEAP_FLAG_NONE,
+		&constResDesc,
+		D3D12_RESOURCE_STATE_GENERIC_READ,
+		nullptr,
+		IID_PPV_ARGS(&constBuff));
+	assert(SUCCEEDED(result));
 
 	// テクスチャリソース設定
 	CD3DX12_RESOURCE_DESC texresDesc = CD3DX12_RESOURCE_DESC::Tex2D(
@@ -117,7 +166,6 @@ void PostEffect::Initialize()
 			D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL);
 
 	// ヒープ設定
-	D3D12_HEAP_PROPERTIES heapProp{};
 	heapProp.Type = D3D12_HEAP_TYPE_DEFAULT;
 	// 深度値クリア設定
 	D3D12_CLEAR_VALUE depthClearValue{};
@@ -154,7 +202,19 @@ void PostEffect::Initialize()
 void PostEffect::Draw(ID3D12GraphicsCommandList* commandList)
 {
 	// 行列更新用アップデート
-	Update();
+	//Update();
+
+	HRESULT result;
+
+	// 定数バッファにデータ転送
+	ConstBufferData* constMap = nullptr;
+	result = this->constBuff->Map(0, nullptr, (void**)&constMap);
+	if (SUCCEEDED(result)) 
+	{
+		constMap->color = this->color;
+		constMap->mat.Identity();
+		this->constBuff->Unmap(0, nullptr);
+	}
 
 	ID3D12DescriptorHeap* ppHeaps[] = { descHeapSRV.Get() };
 
@@ -168,7 +228,7 @@ void PostEffect::Draw(ID3D12GraphicsCommandList* commandList)
 	commandList->IASetVertexBuffers(0, 1, &vbView);
 
 	// CBVの設定コマンド
-	commandList->SetGraphicsRootConstantBufferView(0, constBuffMaterial->GetGPUVirtualAddress());
+	commandList->SetGraphicsRootConstantBufferView(0, constBuff->GetGPUVirtualAddress());
 	//commandList->SetGraphicsRootDescriptorTable(1, TextureManager::GetData(tIndex)->gpuHandle);
 	commandList->SetGraphicsRootDescriptorTable(1,descHeapSRV->GetGPUDescriptorHandleForHeapStart());
 
