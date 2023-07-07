@@ -4773,7 +4773,7 @@ FEATURE_SUPPORT_GET(BOOL, m_dOptions11, AtomicInt64OnDescriptorHeapResourceSuppo
 inline HRESULT CD3DX12FeatureSupport::QueryHighestShaderModel()
 {
     // Check support in descending order
-    HRESULT result;
+    HRESULT result = S_FALSE;
 
     const D3D_SHADER_MODEL allModelVersions[] =
     {
@@ -4814,7 +4814,7 @@ inline HRESULT CD3DX12FeatureSupport::QueryHighestShaderModel()
 // Must be updated whenever a new root signature version is added to the d3d12.h header
 inline HRESULT CD3DX12FeatureSupport::QueryHighestRootSignatureVersion()
 {
-    HRESULT result;
+    HRESULT result = S_FALSE;
 
     const D3D_ROOT_SIGNATURE_VERSION allRootSignatureVersions[] =
     {
@@ -4847,7 +4847,7 @@ inline HRESULT CD3DX12FeatureSupport::QueryHighestRootSignatureVersion()
 // Helper funcion to decide the highest feature level
 inline HRESULT CD3DX12FeatureSupport::QueryHighestFeatureLevel()
 {
-    HRESULT result;
+    HRESULT result = S_FALSE;
 
     // Check against a list of all feature levels present in d3dcommon.h
     // Needs to be updated for future feature levels

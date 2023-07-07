@@ -1,13 +1,12 @@
 #include "FBXObject3D.h"
 
-ID3D12Device* FBXObject3D::device = nullptr;
 Camera* FBXObject3D::camera = nullptr;
 
 using namespace Microsoft::WRL;
 using namespace DirectX;
 
 ID3D12GraphicsCommandList* FBXObject3D::commandList = nullptr;
-ComPtr<ID3D12RootSignature> FBXObject3D::rootSigunature;
+ComPtr<ID3D12RootSignature> FBXObject3D::rootSignature;
 ComPtr<ID3D12PipelineState> FBXObject3D::pipelineState;
 
 void FBXObject3D::Initialize()
@@ -15,7 +14,7 @@ void FBXObject3D::Initialize()
 	// 1フレーム分の時間を60FPSで設定
 	frameTime.SetTime(0,0,0,1,0, FbxTime::EMode::eFrames60);
 
-	HRESULT result;
+	HRESULT result = S_FALSE;
 	// ヒープ設定/リソース設定
 	D3D12_HEAP_PROPERTIES heapProp{};
 	heapProp.Type = D3D12_HEAP_TYPE_UPLOAD;
@@ -29,7 +28,7 @@ void FBXObject3D::Initialize()
 	resDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
 	// 定数バッファの生成
-	result = device->CreateCommittedResource(
+	result = DirectXBase::Get()->device->CreateCommittedResource(
 		&heapProp,
 		D3D12_HEAP_FLAG_NONE,
 		&resDesc,
@@ -41,7 +40,7 @@ void FBXObject3D::Initialize()
 	resDesc.Width = (sizeof(ConstBufferDataSkin) + 0xff) & ~0xff;	// 256バイトアラインメント
 
 	// 定数バッファの生成 (スキン)
-	result = device->CreateCommittedResource(
+	result = DirectXBase::Get()->device->CreateCommittedResource(
 		&heapProp,
 		D3D12_HEAP_FLAG_NONE,
 		&resDesc,
@@ -57,7 +56,7 @@ void FBXObject3D::CreateGraphicsPipeline()
 	ComPtr<ID3DBlob> psBlob;	// ピクセルシェーダオブジェクト
 	ComPtr<ID3DBlob> errorBlob;	// エラーオブジェクト
 
-	assert(device);
+	assert(DirectXBase::Get()->device);
 	// 頂点シェーダの読み込みとコンパイル
 	result = D3DCompileFromFile(
 		L"Resources/shaders/FBXVS.hlsl",	// シェーダファイル名
@@ -204,13 +203,13 @@ void FBXObject3D::CreateGraphicsPipeline()
 	// バージョン自動判定のシリアライズ
 	result = D3DX12SerializeVersionedRootSignature(&rootSignatureDesc, D3D_ROOT_SIGNATURE_VERSION_1_0, &rootSigBlob, &errorBlob);
 	// ルートシグネチャの生成
-	result = device->CreateRootSignature(0, rootSigBlob->GetBufferPointer(), rootSigBlob->GetBufferSize(), IID_PPV_ARGS(rootSigunature.ReleaseAndGetAddressOf()));
+	result = DirectXBase::Get()->device->CreateRootSignature(0, rootSigBlob->GetBufferPointer(), rootSigBlob->GetBufferSize(), IID_PPV_ARGS(rootSignature.ReleaseAndGetAddressOf()));
 	if (FAILED(result)) { assert(0); }
 
-	gpipeline.pRootSignature = rootSigunature.Get();
+	gpipeline.pRootSignature = rootSignature.Get();
 
 	// グラフィックスパイプラインの生成
-	result = device->CreateGraphicsPipelineState(&gpipeline, IID_PPV_ARGS(pipelineState.ReleaseAndGetAddressOf()));
+	result = DirectXBase::Get()->device->CreateGraphicsPipelineState(&gpipeline, IID_PPV_ARGS(pipelineState.ReleaseAndGetAddressOf()));
 	if (FAILED(result)) { assert(0); }
 }
 
@@ -230,7 +229,7 @@ void FBXObject3D::Update()
 
 	// スケール、回転、平行移動行列の計算
 	Matrix4 matScale, matRot, matTrans;
-	HRESULT result;
+	HRESULT result = S_FALSE;
 
 	matScale = Matrix4::Identity();
 	matScale.Scale(scale);
@@ -299,7 +298,7 @@ void FBXObject3D::Draw()
 	// パイプラインステートの設定
 	commandList->SetPipelineState(pipelineState.Get());
 	// ルートシグネチャの設定
-	commandList->SetGraphicsRootSignature(rootSigunature.Get());
+	commandList->SetGraphicsRootSignature(rootSignature.Get());
 	// プリミティブ形状を設定
 	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	// 定数バッファビューをセット

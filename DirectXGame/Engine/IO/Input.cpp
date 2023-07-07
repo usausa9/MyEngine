@@ -23,7 +23,7 @@ static BYTE _prev[256] = {};
 
 void Key::Init(HINSTANCE hInstance, HWND hwnd)
 {
-	HRESULT result;
+	HRESULT result = S_FALSE;
 
 	// DirectInput‚Ì‰Šú‰»
 	ComPtr<IDirectInput8> directInput = nullptr;

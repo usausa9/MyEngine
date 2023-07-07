@@ -16,7 +16,7 @@ const Float3 operator+(const Float3& Ihs, const Float3& rhs)
 
 void ParticleManager::CreatePipeline()
 {
-	HRESULT result;
+	HRESULT result = S_FALSE;
 
 	// デスクリプタレンジの設定
 	D3D12_DESCRIPTOR_RANGE descriptorRange{};
@@ -256,7 +256,7 @@ void ParticleManager::CreatePipeline()
 // パーティクル初期化
 void ParticleManager::InitializeParticle()
 {
-	HRESULT result;
+	HRESULT result = S_FALSE;
 
 	{
 		// 定数バッファのヒープ設定

@@ -47,7 +47,7 @@ void MyGame::Initialize()
 #pragma endregion
 
 #pragma region 描画初期化処理
-	HRESULT result;
+	HRESULT result = S_FALSE;
 	{
 		// ヒープ設定
 		D3D12_HEAP_PROPERTIES cbHeapProp{};
@@ -97,7 +97,7 @@ void MyGame::Initialize()
 	rootParams[3].Descriptor.ShaderRegister = 2;						// 定数バッファの番号
 	rootParams[3].Descriptor.RegisterSpace = 0;							// デフォルト値
 	rootParams[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;		// 全てのシェーダから見える
-
+	
 	ComPtr<ID3DBlob> vsBlob = nullptr;		 // 頂点シェーダオブジェクト
 	ComPtr<ID3DBlob> psBlob = nullptr;		 // ピクセルシェーダオブジェクト
 	ComPtr<ID3DBlob> errorBlob = nullptr;	 // エラーオブジェクト

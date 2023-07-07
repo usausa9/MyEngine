@@ -188,6 +188,7 @@
     <None Include="Resources\shaders\FBX.hlsli">
       <Filter>3.シェーダー ファイル</Filter>
     </None>
+    <None Include="Resources\shaders\PostEffect.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\BasicPS.hlsl">
@@ -217,6 +218,8 @@
     <FxCompile Include="Resources\shaders\FBXPS.hlsl">
       <Filter>3.シェーダー ファイル</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\shaders\PostEffectPS.hlsl" />
+    <FxCompile Include="Resources\shaders\PostEffectVS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectXGame\main.cpp">

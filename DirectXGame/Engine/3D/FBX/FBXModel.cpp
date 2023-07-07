@@ -10,7 +10,7 @@ FBXModel::~FBXModel()
 
 void FBXModel::CreateBuffers(ID3D12Device* device)
 {
-	HRESULT result;
+	HRESULT result = S_FALSE;
 	
 	// 頂点データ全体のサイズ
 	UINT sizeVB = static_cast<UINT>(sizeof(VertexPosNormalUvSkin) * vertices.size());

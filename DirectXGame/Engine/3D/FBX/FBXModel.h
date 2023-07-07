@@ -1,6 +1,7 @@
 #pragma once
 #include "TextureManager.h"
 #include "Common.h"
+#include "DirectXBase.h"
 
 #include <DirectXTex.h>
 #include <fbxsdk.h>

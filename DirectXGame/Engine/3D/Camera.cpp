@@ -16,7 +16,7 @@ void Camera::Initialize()
 		0.1f, 1000.0f
 	);
 
-	HRESULT result;
+	HRESULT result = S_FALSE;
 
 	// ÉqÅ[Évê›íË
 	D3D12_HEAP_PROPERTIES cbHeapProp{};

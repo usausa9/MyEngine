@@ -34,6 +34,11 @@ public:	// メンバ関数
 	void Initialize();
 
 	/// <summary>
+	/// パイプライン生成
+	/// </summary>
+	void CreateGraphicsPipelineState();
+
+	/// <summary>
 	/// 描画コマンドの発行
 	/// </summary>
 	/// <param name="commandList"></param>
@@ -58,6 +63,12 @@ private: // DirectX ポインタ類
 	ComPtr<ID3D12Resource> vertBuff = nullptr;
 	ComPtr<ID3D12Resource> depthBuff = nullptr;
 
+	// グラフィックスパイプライン
+	ComPtr<ID3D12PipelineState> pipelineState;
+
+	// ルートシグネチャ
+	ComPtr<ID3D12RootSignature> rootSignature;
+
 	// SRV用デスクリプタヒープ
 	ComPtr<ID3D12DescriptorHeap> descHeapSRV = nullptr;
 
@@ -67,5 +78,6 @@ private: // DirectX ポインタ類
 	// DSV用デスクリプタヒープ
 	ComPtr<ID3D12DescriptorHeap> descHeapDSV = nullptr;
 
+	// 頂点バッファビュー
 	D3D12_VERTEX_BUFFER_VIEW vbView{};
 };
