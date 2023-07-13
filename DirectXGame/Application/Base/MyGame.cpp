@@ -348,18 +348,16 @@ void MyGame::Draw()
 	//spriteManager->PreDraw();
 	//scene.Draw2D();
 
-	
-
-	// レンダーテクスチャへの描画
+	// レンダーテクスチャへの描画終了
 	postEffect.get()->PostDrawScene(DirectXBase::Get()->commandList.Get());
 
-	// DirectX描画前処理
+	// バックバッファ描画前処理
 	DirectXBase::Get()->PreDraw();
 
 	// ポストエフェクト描画
 	postEffect->Draw(DirectXBase::Get()->commandList.Get());
 
-	// 描画後処理
+	// バックバッファ描画後処理
 	PostDraw();
 }
 
