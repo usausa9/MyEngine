@@ -23,7 +23,6 @@ private: // サブクラス
 private: // 静的メンバ変数
 	// 画面クリアカラー
 	static const float clearColor[4];
-	static const float clearColor2[4];
 
 public:	// メンバ関数
 	/// <summary>

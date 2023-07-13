@@ -6,7 +6,6 @@ using namespace Input;
 
 // 静的メンバ変数の実体
 const float PostEffect::clearColor[4] = { 0.25f,0.5f,0.1f,1.0f }; // RGBA 緑っぽい色
-const float PostEffect::clearColor2[4] = { 0.15f,0.5f,0.1f,1.0f }; // RGBA 緑っぽい色
 
 PostEffect::PostEffect()
 { 
@@ -91,7 +90,6 @@ void PostEffect::Initialize()
 	textureHeapProp.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
 
 	CD3DX12_CLEAR_VALUE clearValue(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, clearColor);
-	CD3DX12_CLEAR_VALUE clearValue2(DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, clearColor2);
 
 	for (int i = 0; i < 2; i++)
 	{
@@ -102,17 +100,7 @@ void PostEffect::Initialize()
 			&texresDesc,
 			D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE,
 			&clearValue,
-			IID_PPV_ARGS(&texBuff[0]));
-		assert(SUCCEEDED(result));
-
-		// テクスチャバッファの生成
-		result = DirectXBase::Get()->device->CreateCommittedResource(
-			&textureHeapProp,
-			D3D12_HEAP_FLAG_NONE,
-			&texresDesc,
-			D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE,
-			&clearValue2,
-			IID_PPV_ARGS(&texBuff[1]));
+			IID_PPV_ARGS(&texBuff[i]));
 		assert(SUCCEEDED(result));
 	
 		{
@@ -375,7 +363,7 @@ void PostEffect::CreateGraphicsPipelineState()
 
 	// スタティックサンプラー
 	CD3DX12_STATIC_SAMPLER_DESC samplerDesc = CD3DX12_STATIC_SAMPLER_DESC(0, D3D12_FILTER_MINIMUM_MIN_MAG_MIP_POINT);
-	samplerDesc.AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+	samplerDesc.AddressU = D3D12_TEXTURE_ADDRESS_MODE_BORDER;
 	samplerDesc.AddressV = D3D12_TEXTURE_ADDRESS_MODE_BORDER;
 
 	// ルートシグネチャの設定
@@ -504,10 +492,11 @@ void PostEffect::PreDrawScene(ID3D12GraphicsCommandList* commandList)
 	// シザー矩形設定コマンドを、コマンドリストに積む
 	commandList->RSSetScissorRects(2, scissorRects);
 
-	// 全画面クリア
-	commandList->ClearRenderTargetView(rtvHs[0], clearColor, 0, nullptr);
-	commandList->ClearRenderTargetView(rtvHs[1], clearColor2, 0, nullptr);
-
+	for (int i = 0; i < 2; i++)
+	{
+		// 全画面クリア
+		commandList->ClearRenderTargetView(rtvHs[i], clearColor, 0, nullptr);
+	}
 	// 深度バッファのクリア
 	commandList->ClearDepthStencilView(dsvH, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 }
