@@ -2,6 +2,8 @@
 #include "Sprite.h"
 #include "Common.h"
 
+#include "Input.h"
+
 class PostEffect : public Sprite
 {
 private: // サブクラス
@@ -58,7 +60,7 @@ public:	// メンバ関数
 
 private: // DirectX ポインタ類
 	// バッファ類
-	ComPtr<ID3D12Resource> texBuff = nullptr;
+	ComPtr<ID3D12Resource> texBuff[2] = {nullptr, nullptr};
 	ComPtr<ID3D12Resource> constBuff = nullptr;
 	ComPtr<ID3D12Resource> vertBuff = nullptr;
 	ComPtr<ID3D12Resource> depthBuff = nullptr;
