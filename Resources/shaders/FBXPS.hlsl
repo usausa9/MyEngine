@@ -13,16 +13,16 @@ struct PSOutput
 PSOutput main(VSOutput input) : SV_TARGET
 {
 	PSOutput output;
-// テクスチャマッピング
-float4 texColor = tex.Sample(smp,input.uv);
-// Lambert反射
-float3 light = normalize(float3(1, -1, 1));	// 右下奥向きのライト
-float diffuse = saturate(dot(-light, input.normal));
-float brightness = diffuse + 0.3f;
-float4 shaderColor = float4(brightness, brightness, brightness, 1.0f);
-
-// 陰影とテクスチャの色を合成
-output.target0 = shaderColor * texColor;
-output.target1 = float4(1 - (shaderColor * texColor).rgb, 1);
-return output;
+	// テクスチャマッピング
+	float4 texColor = tex.Sample(smp,input.uv);
+	// Lambert反射
+	float3 light = normalize(float3(1, -1, 1));	// 右下奥向きのライト
+	float diffuse = saturate(dot(-light, input.normal));
+	float brightness = diffuse + 0.3f;
+	float4 shaderColor = float4(brightness, brightness, brightness, 1.0f);
+	
+	// 陰影とテクスチャの色を合成
+	output.target0 = shaderColor * texColor;
+	output.target1 = shaderColor * texColor;
+	return output;
 }

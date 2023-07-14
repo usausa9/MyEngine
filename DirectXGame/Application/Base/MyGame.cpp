@@ -39,8 +39,6 @@ void MyGame::Initialize()
 	TextureManager::Init();
 
 	// ポストエフェクト用テクスチャの読み込み
-	//postTex = TextureManager::Load(L"Resources/white1x1.png");
-
 	postEffect = make_unique<PostEffect>();
 	postEffect.get()->Initialize();
 
@@ -260,15 +258,12 @@ void MyGame::Initialize()
 	pipelineDesc.DSVFormat = DXGI_FORMAT_D32_FLOAT;		// 深度値フォーマット
 
 	// パイプランステートの生成
-	
 	result = DirectXBase::Get()->device->CreateGraphicsPipelineState(&pipelineDesc, IID_PPV_ARGS(&pipelineState));
 	assert(SUCCEEDED(result));
 
-	
 	FBXLoader::GetInstance()->Initialize(DirectXBase::Get()->device.Get());
 
 	scene.Initialize();
-	
 }
 
 void MyGame::Finalize()

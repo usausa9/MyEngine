@@ -67,6 +67,5 @@ private: // メンバ変数
 	WinAPI& window = *WinAPI::Get();
 
 	// ポストエフェクト
-	TextureIndex postTex;
 	unique_ptr<PostEffect> postEffect = nullptr;
 };
